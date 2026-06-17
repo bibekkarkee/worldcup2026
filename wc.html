@@ -1,0 +1,1992 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+    <meta charset='utf-8'/>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'/>
+    <meta content='blogger' name='generator'/>
+    <b:skin><![CDATA[
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(145deg, #0a0f1f 0%, #1a2a4a 50%, #0d1b2a 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            padding: 16px;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 20px 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            min-height: 90vh;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0 25px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        .header h1 {
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffd700 0%, #f7971e 50%, #ff6b00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header .subtitle {
+            color: #8ab4f8;
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            margin-top: 6px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        .login-container {
+            max-width: 420px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 35px 30px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ffd700;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #8ab4f8;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .form-group select option {
+            background: #1a2a4a;
+            color: #fff;
+        }
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238ab4f8' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            cursor: pointer;
+        }
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffd700, #f7971e);
+            color: #0a1a2e;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.25);
+        }
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-sm {
+            width: auto;
+            padding: 10px 28px;
+            font-size: 14px;
+        }
+        .message {
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 10px 0 18px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .message.error {
+            background: rgba(255, 0, 0, 0.12);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            color: #ff6b6b;
+        }
+        .message.success {
+            background: rgba(0, 255, 0, 0.08);
+            border: 1px solid rgba(68, 255, 68, 0.2);
+            color: #6bff6b;
+        }
+        .message.info {
+            background: rgba(0, 150, 255, 0.08);
+            border: 1px solid rgba(68, 136, 255, 0.2);
+            color: #6bb5ff;
+        }
+        .dashboard {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .user-info .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ff6b00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #0a1a2e;
+            flex-shrink: 0;
+        }
+        .user-info .name {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .user-info .rank {
+            color: #ffd700;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .logout-btn {
+            padding: 8px 22px;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 68, 68, 0.05);
+            color: #ff6b6b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .logout-btn:hover {
+            background: rgba(255, 68, 68, 0.15);
+            border-color: #ff4444;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px 16px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 215, 0, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .stat-card .number {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 800;
+            color: #ffd700;
+        }
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: #8ab4f8;
+            margin-top: 6px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 16px;
+        }
+        .tab-btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            background: transparent;
+            color: #8ab4f8;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+        .tab-btn.active {
+            background: rgba(255, 215, 0, 0.08);
+            color: #ffd700;
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: #ffd700;
+            border-radius: 2px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .matches-container {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 25px;
+        }
+        .matches-container h3 {
+            color: #ffd700;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .match-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        .match-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .match-card .teams {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 200px;
+            flex-wrap: wrap;
+        }
+        .match-card .team {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .match-card .vs {
+            color: #8ab4f8;
+            font-size: 0.8rem;
+            font-weight: 300;
+        }
+        .match-card .score-inputs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .match-card .score-inputs input {
+            width: 48px;
+            padding: 8px 4px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .match-card .score-inputs input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+        }
+        .match-card .score-inputs input:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .match-card .score-inputs span {
+            color: #8ab4f8;
+            font-weight: 700;
+            padding: 0 2px;
+        }
+        .match-card .save-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #ffd700, #f7971e);
+            color: #0a1a2e;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+        .match-card .save-btn:hover:not(:disabled) {
+            transform: scale(1.04);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+        .match-card .save-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .match-card .locked {
+            color: #ff6b6b;
+            font-weight: 700;
+            padding: 4px 14px;
+            background: rgba(255, 0, 0, 0.08);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 68, 68, 0.15);
+            font-size: 0.8rem;
+        }
+        .match-card .predicted {
+            color: #6bff6b;
+            padding: 4px 14px;
+            background: rgba(0, 255, 0, 0.05);
+            border-radius: 6px;
+            border: 1px solid rgba(68, 255, 68, 0.1);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .match-card .result {
+            color: #ffd700;
+            padding: 4px 14px;
+            background: rgba(255, 215, 0, 0.06);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .countdown {
+            color: #ff6b6b;
+            font-weight: 700;
+            font-size: 0.85rem;
+            background: rgba(255, 0, 0, 0.05);
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+        .champion-section {
+            background: rgba(255, 215, 0, 0.03);
+            border-radius: 14px;
+            padding: 22px 24px;
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            margin-bottom: 25px;
+        }
+        .champion-section h3 {
+            color: #ffd700;
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+        .champion-section .desc {
+            color: #8ab4f8;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        .champion-section .desc .bonus {
+            color: #ffd700;
+        }
+        .champion-section .champion-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .champion-section select {
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 16px;
+            min-width: 200px;
+            flex: 1;
+            font-family: inherit;
+            appearance: none;
+            cursor: pointer;
+        }
+        .champion-section select option {
+            background: #1a2a4a;
+            color: #fff;
+        }
+        .champion-section select:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+        .champion-status {
+            color: #6bff6b;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .leaderboard-container {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 18px;
+        }
+        .leaderboard-container h3 {
+            color: #ffd700;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .leaderboard-table th {
+            text-align: left;
+            padding: 12px 14px;
+            background: rgba(255, 215, 0, 0.05);
+            color: #ffd700;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.1);
+        }
+        .leaderboard-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .leaderboard-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .leaderboard-table .rank-1 { color: #ffd700; font-weight: 700; }
+        .leaderboard-table .rank-2 { color: #c0c0c0; font-weight: 700; }
+        .leaderboard-table .rank-3 { color: #cd7f32; font-weight: 700; }
+        .leaderboard-table .highlight {
+            background: rgba(255, 215, 0, 0.06);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #8ab4f8;
+        }
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+        .empty-state p {
+            font-size: 1rem;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.1rem;
+            color: #8ab4f8;
+        }
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+        }
+        .footer {
+            text-align: center;
+            padding: 25px 0 10px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            color: #5a7a9a;
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+        @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 16px; }
+            .header { padding: 20px 0; }
+            .header h1 { font-size: 1.6rem; }
+            .login-container { padding: 25px 20px; margin: 20px auto; }
+            .dashboard-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                padding: 16px;
+            }
+            .user-info { justify-content: center; }
+            .match-card {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 14px;
+            }
+            .match-card .teams { justify-content: center; }
+            .match-card .score-inputs { justify-content: center; }
+            .match-card .save-btn { width: 100%; }
+            .tabs { justify-content: center; }
+            .tab-btn { padding: 8px 16px; font-size: 0.85rem; }
+            .leaderboard-table { font-size: 0.8rem; }
+            .leaderboard-table th,
+            .leaderboard-table td { padding: 8px 10px; }
+            .champion-section .champion-row { flex-direction: column; align-items: stretch; }
+            .champion-section select { min-width: unset; }
+            .btn-sm { width: 100%; }
+        }
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .stat-card { padding: 14px 10px; }
+            .stat-card .number { font-size: 1.4rem; }
+            .stat-card .label { font-size: 0.7rem; }
+            .match-card .team { font-size: 0.85rem; }
+            .match-card .score-inputs input { width: 40px; font-size: 14px; padding: 6px 2px; }
+            .user-info .avatar { width: 40px; height: 40px; font-size: 18px; }
+            .user-info .name { font-size: 1rem; }
+        }
+    ]]></b:skin>
+</head>
+<body>
+    <b:section class='main' id='main' maxwidgets='1' showaddelement='yes'>
+      <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
+        <b:widget-settings>
+          <b:widget-setting name='commentLabel'>Comments</b:widget-setting>
+          <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+          <b:widget-setting name='authorLabel'>Posted by:</b:widget-setting>
+          <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+          <b:widget-setting name='reactionsLabel'/>
+          <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+          <b:widget-setting name='style.layout'>728x90</b:widget-setting>
+          <b:widget-setting name='showLocation'>false</b:widget-setting>
+          <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+          <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+          <b:widget-setting name='style.bordercolor'>#ffffff</b:widget-setting>
+          <b:widget-setting name='backlinksLabel'/>
+          <b:widget-setting name='showDateHeader'>true</b:widget-setting>
+          <b:widget-setting name='style.textcolor'>#ffffff</b:widget-setting>
+          <b:widget-setting name='showCommentLink'>true</b:widget-setting>
+          <b:widget-setting name='style.urlcolor'>#ffffff</b:widget-setting>
+          <b:widget-setting name='postLocationLabel'>Location:Nepal</b:widget-setting>
+          <b:widget-setting name='showAuthor'>true</b:widget-setting>
+          <b:widget-setting name='style.linkcolor'>#ffffff</b:widget-setting>
+          <b:widget-setting name='style.bgcolor'>#ffffff</b:widget-setting>
+          <b:widget-setting name='showLabels'>true</b:widget-setting>
+          <b:widget-setting name='postLabelsLabel'>Tags:</b:widget-setting>
+          <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+          <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+          <b:widget-setting name='showReactions'>false</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+                <div class='container'>
+                    <div class='header'>
+                        <h1>🏆 World Cup 2026</h1>
+                        <div class='subtitle'>USA ; Mexico ; Canada</div>
+                    </div>
+
+                    <div class='login-container' id='loginSection'>
+                        <h2>🔑 Login</h2>
+                        <div id='loginMessage'/>
+                        <div class='form-group'>
+                            <label for='playerSelect'>Select Your Name</label>
+                            <select id='playerSelect'>
+                                <option value=''>-- Loading Players --</option>
+                            </select>
+                        </div>
+                        <div class='form-group'>
+                            <label for='pinInput'>Enter Your PIN</label>
+                            <input id='pinInput' inputmode='numeric' maxlength='4' placeholder='Enter 4-digit PIN' type='password'/>
+                        </div>
+                        <button class='btn' id='loginBtn' onclick='login()'>Login</button>
+                    </div>
+
+                    <div class='dashboard' id='dashboardSection'>
+                        <div class='dashboard-header'>
+                            <div class='user-info'>
+                                <div class='avatar' id='userAvatar'>R</div>
+                                <div>
+                                    <div class='name' id='userName'>User</div>
+                                    <div class='rank' id='userRank'>🏅 Rank: #?</div>
+                                </div>
+                            </div>
+                            <button class='logout-btn' onclick='logout()'>🚪 Logout</button>
+                        </div>
+
+                        <div class='stats-grid'>
+                            <div class='stat-card'>
+                                <div class='number' id='statPoints'>0</div>
+                                <div class='label'>&#11088; Total Points</div>
+                            </div>
+                            <div class='stat-card'>
+                                <div class='number' id='statExact'>0</div>
+                                <div class='label'>🎯 Exact Scores</div>
+                            </div>
+                            <div class='stat-card'>
+                                <div class='number' id='statPredictions'>0</div>
+                                <div class='label'>📊 Predictions Made</div>
+                            </div>
+                            <div class='stat-card'>
+                                <div class='number' id='statRank'>#?</div>
+                                <div class='label'>📈 Current Rank</div>
+                            </div>
+                        </div>
+
+                        <div class='tabs'>
+                            <button class='tab-btn active' data-tab='matches'>📅 Matches</button>
+                            <button class='tab-btn' data-tab='leaderboard'>🏆 Leaderboard</button>
+                            <button class='tab-btn' data-tab='myPredictions'>📋 My Predictions</button>
+                        </div>
+
+                        <div class='tab-content active' id='tabMatches'>
+                            <div class='matches-container'>
+                                <h3>📅 Upcoming &amp; Live Matches</h3>
+                                <div id='matchesList'>
+                                    <div class='loading'>Loading matches</div>
+                                </div>
+                            </div>
+                            <div class='champion-section'>
+                                <h3>🏆 Predict The Champion</h3>
+                                <p class='desc'>
+                                    Select the team you think will win the World Cup 2026.
+                                    <span class='bonus'>(Bonus: 10 points if correct!)</span>
+                                </p>
+                                <div class='champion-row'>
+                                    <select id='championSelect'>
+                                        <option value=''>Select Champion</option>
+                                    </select>
+                                    <button class='btn btn-sm' onclick='saveChampion()'>Save Champion</button>
+                                    <span class='champion-status' id='championStatus'/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='tab-content' id='tabLeaderboard'>
+                            <div class='leaderboard-container'>
+                                <h3>🏆 Live Leaderboard</h3>
+                                <div id='leaderboardContent'>
+                                    <div class='loading'>Loading leaderboard</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='tab-content' id='tabMyPredictions'>
+                            <div class='matches-container'>
+                                <h3>📋 All My Predictions</h3>
+                                <div id='myPredictionsContent'>
+                                    <div class='loading'>Loading your predictions</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='footer'>
+                        2026 World Cup Prediction Pool - Built for Office Fun
+                    </div>
+                </div>
+
+                <script>
+                //<![CDATA[
+                var APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRPMze4SGCw8nEgPnvS2BTg5YJ22Fec_xJhT3WSWspauz7P29SVVLWEKP5VLI8M-6ZDw/exec';
+                var currentUser = null;
+                var refreshTimer = null;
+                var isLoading = false;
+
+                function callAPI(action, data, callback) {
+                    if (isLoading) return;
+                    isLoading = true;
+                    var url = APP_SCRIPT_URL + '?action=' + encodeURIComponent(action);
+                    if (data) {
+                        try {
+                            var dataStr = JSON.stringify(data);
+                            url += '&amp;data=' + encodeURIComponent(dataStr);
+                        } catch(e) {
+                            console.error('Error encoding data:', e);
+                        }
+                    }
+                    url += '&amp;_cb=' + new Date().getTime();
+                    fetch(url, {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    })
+                    .then(function(response) {
+                        if (!response.ok) {
+                            throw new Error('HTTP error: ' + response.status);
+                        }
+                        return response.json();
+                    })
+                    .then(function(result) {
+                        isLoading = false;
+                        if (result.status === 'error') {
+                            if (callback) callback(result, null);
+                            return;
+                        }
+                        if (callback) callback(null, result);
+                    })
+                    .catch(function(error) {
+                        isLoading = false;
+                        console.error('API Error:', error);
+                        if (callback) callback({ status: 'error', message: error.message }, null);
+                    });
+                }
+
+                function loadPlayers() {
+                    var select = document.getElementById('playerSelect');
+                    select.innerHTML = '<option value="">Loading...</option>';
+                    callAPI('getPlayers', null, function(err, result) {
+                        if (err) {
+                            select.innerHTML = '<option value="">Error loading players</option>';
+                            document.getElementById('loginMessage').innerHTML =
+                                '<div class="message error">❌ Failed to load players: ' + err.message + '</div>';
+                            return;
+                        }
+                        select.innerHTML = '<option value="">Select Your Name</option>';
+                        if (result.players &amp;&amp; result.players.length > 0) {
+                            for (var i = 0; i < result.players.length; i++) {
+                                var option = document.createElement('option');
+                                option.value = result.players[i].id;
+                                option.textContent = result.players[i].name;
+                                select.appendChild(option);
+                            }
+                        } else {
+                            select.innerHTML = '<option value="">No players found</option>';
+                        }
+                        loadChampionTeams();
+                    });
+                }
+
+                function login() {
+                    var playerId = document.getElementById('playerSelect').value;
+                    var pin = document.getElementById('pinInput').value;
+                    if (!playerId) {
+                        showLoginMessage('Please select your name.', 'error');
+                        return;
+                    }
+                    if (!pin || pin.length !== 4) {
+                        showLoginMessage('Please enter a valid 4-digit PIN.', 'error');
+                        return;
+                    }
+                    var btn = document.getElementById('loginBtn');
+                    btn.disabled = true;
+                    btn.textContent = '⏳ Logging in...';
+                    showLoginMessage('⏳ Verifying credentials...', 'info');
+                    callAPI('login', { playerId: playerId, pin: pin }, function(err, result) {
+                        btn.disabled = false;
+                        btn.textContent = 'Login';
+                        if (err) {
+                            showLoginMessage('❌ ' + err.message, 'error');
+                            return;
+                        }
+                        if (result &amp;&amp; result.user) {
+                            currentUser = result.user;
+                            document.getElementById('loginSection').style.display = 'none';
+                            document.getElementById('dashboardSection').style.display = 'block';
+                            loadDashboard();
+                        } else {
+                            showLoginMessage('❌ Login failed. Please try again.', 'error');
+                        }
+                    });
+                }
+
+                function showLoginMessage(msg, type) {
+                    var container = document.getElementById('loginMessage');
+                    container.innerHTML = '<div class="message ' + type + '">' + msg + '</div>';
+                }
+
+                function logout() {
+                    currentUser = null;
+                    document.getElementById('loginSection').style.display = 'block';
+                    document.getElementById('dashboardSection').style.display = 'none';
+                    document.getElementById('pinInput').value = '';
+                    showLoginMessage('👋 Logged out successfully.', 'success');
+                    if (refreshTimer) {
+                        clearInterval(refreshTimer);
+                        refreshTimer = null;
+                    }
+                }
+
+                function loadDashboard() {
+                    updateUserInfo();
+                    loadMatches();
+                    loadLeaderboard();
+                    loadMyPredictions();
+                    loadChampionStatus();
+                    if (refreshTimer) clearInterval(refreshTimer);
+                    refreshTimer = setInterval(function() {
+                        loadMatches();
+                        loadLeaderboard();
+                        loadChampionStatus();
+                    }, 60000);
+                }
+
+                function updateUserInfo() {
+                    if (!currentUser) return;
+                    document.getElementById('userName').textContent = currentUser.name || 'User';
+                    document.getElementById('userAvatar').textContent = (currentUser.name || 'U').charAt(0);
+                    document.getElementById('userRank').textContent = '🏅 Rank: #' + (currentUser.rank || '?');
+                    document.getElementById('statPoints').textContent = currentUser.points || 0;
+                    document.getElementById('statExact').textContent = currentUser.exactScores || 0;
+                    document.getElementById('statRank').textContent = '#' + (currentUser.rank || '?');
+                }
+
+                function loadChampionTeams() {
+                    var select = document.getElementById('championSelect');
+                    select.innerHTML = '<option value="">Loading teams...</option>';
+                    callAPI('getTeams', null, function(err, result) {
+                        if (err) {
+                            select.innerHTML = '<option value="">Error loading teams</option>';
+                            return;
+                        }
+                        select.innerHTML = '<option value="">Select Champion</option>';
+                        if (result.teams &amp;&amp; result.teams.length > 0) {
+                            for (var i = 0; i < result.teams.length; i++) {
+                                var option = document.createElement('option');
+                                option.value = result.teams[i];
+                                option.textContent = result.teams[i];
+                                select.appendChild(option);
+                            }
+                        }
+                    });
+                }
+
+                function loadChampionStatus() {
+                    if (!currentUser) return;
+                    callAPI('getChampion', null, function(err, result) {
+                        var status = document.getElementById('championStatus');
+                        if (!err &amp;&amp; result &amp;&amp; result.champion) {
+                            status.textContent = '✅ Your pick: ' + result.champion;
+                            status.style.color = '#6bff6b';
+                        } else {
+                            status.textContent = '';
+                        }
+                    });
+                }
+
+                function saveChampion() {
+                    var champion = document.getElementById('championSelect').value;
+                    var status = document.getElementById('championStatus');
+                    if (!champion) {
+                        status.textContent = '⚠️ Please select a team.';
+                        status.style.color = '#ff6b6b';
+                        return;
+                    }
+                    status.textContent = '⏳ Saving...';
+                    status.style.color = '#8ab4f8';
+                    callAPI('saveChampion', { champion: champion }, function(err, result) {
+                        if (err) {
+                            status.textContent = '❌ ' + err.message;
+                            status.style.color = '#ff6b6b';
+                            return;
+                        }
+                        status.textContent = '✅ Champion saved: ' + champion + ' (Bonus: 10 points if correct!)';
+                        status.style.color = '#6bff6b';
+                    });
+                }
+
+                function loadMatches() {
+                    var container = document.getElementById('matchesList');
+                    container.innerHTML = '<div class="loading">Loading matches</div>';
+                    callAPI('getMatches', null, function(err, result) {
+                        if (err) {
+                            container.innerHTML = '<div class="message error">❌ ' + err.message + '</div>';
+                            return;
+                        }
+                        if (result &amp;&amp; result.matches) {
+                            renderMatches(result.matches);
+                            if (result.predictionsCount !== undefined) {
+                                document.getElementById('statPredictions').textContent = result.predictionsCount;
+                            }
+                        } else {
+                            container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>No matches available.</p></div>';
+                        }
+                    });
+                }
+
+                function renderMatches(matches) {
+                    var container = document.getElementById('matchesList');
+                    if (!matches || matches.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>No matches available.</p></div>';
+                        return;
+                    }
+                    var html = '';
+                    for (var i = 0; i < matches.length; i++) {
+                        var match = matches[i];
+                        var isLocked = match.locked || false;
+                        var hasPrediction = match.prediction !== null &amp;&amp; match.prediction !== undefined;
+                        var hasResult = match.result &amp;&amp; match.result.home !== undefined &amp;&amp; match.result.home !== null;
+                        var timeRemaining = match.timeRemaining || '';
+                        var homeVal = (hasPrediction &amp;&amp; match.prediction.home !== undefined) ? match.prediction.home : '';
+                        var awayVal = (hasPrediction &amp;&amp; match.prediction.away !== undefined) ? match.prediction.away : '';
+                        var saveText = hasPrediction ? 'Update' : 'Save';
+                        var disabledAttr = (isLocked || hasResult) ? 'disabled' : '';
+                        html += `
+                            <div class="match-card" data-matchid="` + match.id + `">
+                                <div class="teams">
+                                    <span class="team">` + (match.home || '?') + `</span>
+                                    <span class="vs">vs</span>
+                                    <span class="team">` + (match.away || '?') + `</span>
+                                    ` + (timeRemaining ? '<span class="countdown">⏱️ ' + timeRemaining + '</span>' : '') + `
+                                    ` + (isLocked ? '<span class="locked">🔒 Locked</span>' : '') + `
+                                    ` + (hasResult ? '<span class="result">✅ ' + match.result.home + ' - ' + match.result.away + '</span>' : '') + `
+                                    ` + (hasPrediction &amp;&amp; !hasResult ? '<span class="predicted">📝 ' + homeVal + ' - ' + awayVal + '</span>' : '') + `
+                                </div>
+                                <div class="score-inputs">
+                                    <input type="number" id="home_` + match.id + `" min="0" max="20" value="` + homeVal + `" ` + disabledAttr + ` />
+                                    <span>-</span>
+                                    <input type="number" id="away_` + match.id + `" min="0" max="20" value="` + awayVal + `" ` + disabledAttr + ` />
+                                    <button class="save-btn" onclick="savePrediction(` + match.id + `)" ` + disabledAttr + `>
+                                        ` + saveText + `
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    container.innerHTML = html;
+                }
+
+                function savePrediction(matchId) {
+                    var homeInput = document.getElementById('home_' + matchId);
+                    var awayInput = document.getElementById('away_' + matchId);
+                    if (!homeInput || !awayInput) return;
+                    var home = parseInt(homeInput.value);
+                    var away = parseInt(awayInput.value);
+                    if (isNaN(home) || isNaN(away) || home < 0 || away < 0) {
+                        alert('Please enter valid scores (0 or higher).');
+                        return;
+                    }
+                    var btn = document.querySelector('.match-card[data-matchid="' + matchId + '"] .save-btn');
+                    if (!btn) return;
+                    btn.textContent = '⏳ Saving...';
+                    btn.disabled = true;
+                    callAPI('savePrediction', { matchId: matchId, home: home, away: away }, function(err, result) {
+                        if (err) {
+                            alert('❌ Failed to save: ' + err.message);
+                            btn.textContent = 'Retry';
+                            btn.disabled = false;
+                            return;
+                        }
+                        btn.textContent = '✅ Saved';
+                        btn.disabled = true;
+                        var countEl = document.getElementById('statPredictions');
+                        var currentCount = parseInt(countEl.textContent) || 0;
+                        countEl.textContent = currentCount + 1;
+                        setTimeout(function() {
+                            loadMatches();
+                        }, 1500);
+                    });
+                }
+
+                function loadLeaderboard() {
+                    var container = document.getElementById('leaderboardContent');
+                    container.innerHTML = '<div class="loading">Loading leaderboard</div>';
+                    callAPI('getLeaderboard', null, function(err, result) {
+                        if (err) {
+                            container.innerHTML = '<div class="message error">❌ ' + err.message + '</div>';
+                            return;
+                        }
+                        if (result &amp;&amp; result.leaderboard) {
+                            renderLeaderboard(result.leaderboard);
+                        } else {
+                            container.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>No data yet.</p></div>';
+                        }
+                    });
+                }
+
+                function renderLeaderboard(leaderboard) {
+                    var container = document.getElementById('leaderboardContent');
+                    if (!leaderboard || leaderboard.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>No data yet.</p></div>';
+                        return;
+                    }
+                    var html = `
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Player</th>
+                                    <th>Points</th>
+                                    <th>Exact Scores</th>
+                                    <th>Predictions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    for (var i = 0; i < leaderboard.length; i++) {
+                        var player = leaderboard[i];
+                        var rank = i + 1;
+                        var rankClass = '';
+                        if (rank === 1) rankClass = 'rank-1';
+                        else if (rank === 2) rankClass = 'rank-2';
+                        else if (rank === 3) rankClass = 'rank-3';
+                        var isCurrentUser = currentUser &amp;&amp; player.id == currentUser.id;
+                        var highlightStyle = isCurrentUser ? 'highlight' : '';
+                        html += `
+                            <tr class="` + highlightStyle + `">
+                                <td class="` + rankClass + `">` + rank + `</td>
+                                <td>` + (player.name || '?') + (isCurrentUser ? ' 👈' : '') + `</td>
+                                <td>` + (player.points || 0) + `</td>
+                                <td>` + (player.exactScores || 0) + `</td>
+                                <td>` + (player.totalPredictions || 0) + `</td>
+                            </tr>
+                        `;
+                    }
+                    html += `
+                            </tbody>
+                        </table>
+                    `;
+                    container.innerHTML = html;
+                }
+
+                function loadMyPredictions() {
+                    var container = document.getElementById('myPredictionsContent');
+                    container.innerHTML = '<div class="loading">Loading your predictions</div>';
+                    if (!currentUser) {
+                        container.innerHTML = '<div class="empty-state"><div class="icon">🔒</div><p>Please login to see your predictions.</p></div>';
+                        return;
+                    }
+                    callAPI('getMyPredictions', null, function(err, result) {
+                        if (err) {
+                            container.innerHTML = '<div class="message error">❌ ' + err.message + '</div>';
+                            return;
+                        }
+                        if (result &amp;&amp; result.predictions) {
+                            renderMyPredictions(result.predictions);
+                        } else {
+                            container.innerHTML = '<div class="empty-state"><div class="icon">📋</div><p>You haven\'t made any predictions yet.</p></div>';
+                        }
+                    });
+                }
+
+                function renderMyPredictions(predictions) {
+                    var container = document.getElementById('myPredictionsContent');
+                    if (!predictions || predictions.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><div class="icon">📋</div><p>You haven\'t made any predictions yet.</p></div>';
+                        return;
+                    }
+                    var html = '';
+                    for (var i = 0; i < predictions.length; i++) {
+                        var pred = predictions[i];
+                        var resultText = pred.result ? pred.result.home + ' - ' + pred.result.away : '⏳ Pending';
+                        var pointsText = pred.points !== null &amp;&amp; pred.points !== undefined ? '+' + pred.points + ' pts' : '⏳';
+                        var isCorrect = pred.points &amp;&amp; pred.points >= 5 ? '🎯' : '';
+                        html += `
+                            <div class="match-card">
+                                <div class="teams">
+                                    <span class="team">` + (pred.home || '?') + `</span>
+                                    <span class="vs">vs</span>
+                                    <span class="team">` + (pred.away || '?') + `</span>
+                                    <span style="color: #8ab4f8; font-size: 0.9em;">📝 ` + (pred.prediction ? pred.prediction.home + ' - ' + pred.prediction.away : '?') + `</span>
+                                    <span style="color: #ffd700;">→</span>
+                                    <span style="color: #6bff6b;">📊 ` + resultText + `</span>
+                                    <span style="color: #ffd700;">` + pointsText + `</span>
+                                    ` + isCorrect + `
+                                </div>
+                            </div>
+                        `;
+                    }
+                    container.innerHTML = html;
+                }
+
+                function setupTabs() {
+                    var tabs = document.querySelectorAll('.tab-btn');
+                    for (var i = 0; i < tabs.length; i++) {
+                        tabs[i].addEventListener('click', function(e) {
+                            var tabName = this.getAttribute('data-tab');
+                            switchTab(tabName);
+                        });
+                    }
+                }
+
+                function switchTab(tabName) {
+                    var tabMap = {
+                        'matches': 'tabMatches',
+                        'leaderboard': 'tabLeaderboard',
+                        'myPredictions': 'tabMyPredictions'
+                    };
+                    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab-content').forEach(function(content) {
+                        content.classList.remove('active');
+                    });
+                    var targetTab = document.getElementById(tabMap[tabName]);
+                    if (targetTab) targetTab.classList.add('active');
+                    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+                        if (btn.getAttribute('data-tab') === tabName) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    if (tabName === 'leaderboard') loadLeaderboard();
+                    if (tabName === 'myPredictions') loadMyPredictions();
+                    if (tabName === 'matches') loadMatches();
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    setupTabs();
+                    loadPlayers();
+                    document.getElementById('pinInput').addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            login();
+                        }
+                    });
+                    document.getElementById('pinInput').addEventListener('input', function(e) {
+                        this.value = this.value.replace(/[^0-9]/g, '');
+                    });
+                });
+                //]]>
+                </script>
+            </b:includable>
+        <b:includable id='backlinkDeleteIcon' var='backlink'/>
+        <b:includable id='backlinks' var='post'/>
+        <b:includable id='comment-form' var='post'>
+  <div class='comment-form'>
+    <a name='comment-form'/>
+    <b:if cond='data:mobile'>
+      <h4 id='comment-post-message'>
+        <a expr:id='data:widget.instanceId + &quot;_comment-editor-toggle-link&quot;' href='javascript:void(0)'><data:postCommentMsg/></a></h4>
+      <p><data:blogCommentMessage/></p>
+      <data:blogTeamBlogMessage/>
+      <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+      <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight' frameborder='0' id='comment-editor' name='comment-editor' src='' style='display: none' width='100%'/>
+    <b:else/>
+      <h4 id='comment-post-message'><data:postCommentMsg/></h4>
+      <p><data:blogCommentMessage/></p>
+      <data:blogTeamBlogMessage/>
+      <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+      <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+    </b:if>
+    <data:post.cmtfpIframe/>
+    <script type='text/javascript'>
+      BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+    </script>
+  </div>
+</b:includable>
+        <b:includable id='commentDeleteIcon' var='comment'>
+  <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
+    <b:if cond='data:showCmtPopup'>
+      <div class='goog-toggle-button'>
+        <div class='goog-inline-block comment-action-icon'/>
+      </div>
+    <b:else/>
+      <a class='comment-delete' expr:href='data:comment.deleteUrl' expr:title='data:top.deleteCommentMsg'>
+        <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
+      </a>
+    </b:if>
+  </span>
+</b:includable>
+        <b:includable id='comment_count_picker' var='post'>
+  <a class='comment-link' expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
+    <data:post.commentLabelFull/>:
+  </a>
+</b:includable>
+        <b:includable id='comment_picker' var='post'>
+  <b:if cond='data:post.showThreadedComments'>
+    <b:include data='post' name='threaded_comments'/>
+  <b:else/>
+    <b:include data='post' name='comments'/>
+  </b:if>
+</b:includable>
+        <b:includable id='comments' var='post'>
+  <div class='comments' id='comments'>
+    <a name='comments'/>
+    <b:if cond='data:post.allowComments'>
+      <h4><data:post.commentLabelFull/>:</h4>
+
+      <b:if cond='data:post.commentPagingRequired'>
+        <span class='paging-control-container'>
+          <b:if cond='data:post.hasOlderLinks'>
+            <a expr:class='data:post.oldLinkClass' expr:href='data:post.oldestLinkUrl'><data:post.oldestLinkText/></a>
+              &#160;
+            <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
+              &#160;
+          </b:if>
+
+          <data:post.commentRangeText/>
+
+          <b:if cond='data:post.hasNewerLinks'>
+            &#160;
+            <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
+            &#160;
+            <a expr:class='data:post.newLinkClass' expr:href='data:post.newestLinkUrl'><data:post.newestLinkText/></a>
+          </b:if>
+        </span>
+      </b:if>
+
+      <div expr:id='data:widget.instanceId + &quot;_comments-block-wrapper&quot;'>
+        <dl expr:class='data:post.avatarIndentClass' id='comments-block'>
+          <b:loop values='data:post.comments' var='comment'>
+            <dt expr:class='&quot;comment-author &quot; + data:comment.authorClass' expr:id='data:comment.anchorName'>
+              <b:if cond='data:comment.favicon'>
+                <img expr:src='data:comment.favicon' height='16px' style='margin-bottom:-2px;' width='16px'/>
+              </b:if>
+              <a expr:name='data:comment.anchorName'/>
+              <b:if cond='data:blog.enabledCommentProfileImages'>
+                <data:comment.authorAvatarImage/>
+              </b:if>
+              <b:if cond='data:comment.authorUrl'>
+                <a expr:href='data:comment.authorUrl' rel='nofollow'><data:comment.author/></a>
+              <b:else/>
+                <data:comment.author/>
+              </b:if>
+              <data:commentPostedByMsg/>
+            </dt>
+            <dd class='comment-body' expr:id='data:widget.instanceId + data:comment.cmtBodyIdPostfix'>
+              <b:if cond='data:comment.isDeleted'>
+                <span class='deleted-comment'><data:comment.body/></span>
+              <b:else/>
+                <p>
+                  <data:comment.body/>
+                </p>
+              </b:if>
+            </dd>
+            <dd class='comment-footer'>
+              <span class='comment-timestamp'>
+                <a expr:href='data:comment.url' title='comment permalink'>
+                  <data:comment.timestamp/>
+                </a>
+                <b:include data='comment' name='commentDeleteIcon'/>
+              </span>
+            </dd>
+          </b:loop>
+        </dl>
+      </div>
+
+      <b:if cond='data:post.commentPagingRequired'>
+        <span class='paging-control-container'>
+          <a expr:class='data:post.oldLinkClass' expr:href='data:post.oldestLinkUrl'>
+            <data:post.oldestLinkText/>
+          </a>
+          <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'>
+            <data:post.olderLinkText/>
+          </a>
+          &#160;
+          <data:post.commentRangeText/>
+          &#160;
+          <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'>
+            <data:post.newerLinkText/>
+          </a>
+          <a expr:class='data:post.newLinkClass' expr:href='data:post.newestLinkUrl'>
+            <data:post.newestLinkText/>
+          </a>
+        </span>
+      </b:if>
+
+      <p class='comment-footer'>
+        <b:if cond='data:post.embedCommentForm'>
+          <b:if cond='data:post.allowNewComments'>
+            <b:include data='post' name='comment-form'/>
+          <b:else/>
+            <data:post.noNewCommentsText/>
+          </b:if>
+        <b:elseif cond='data:post.allowComments'/>
+          <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'><data:postCommentMsg/></a>
+        </b:if>
+      </p>
+    </b:if>
+    <b:if cond='data:showCmtPopup'>
+      <div id='comment-popup'>
+        <iframe allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'>
+        </iframe>
+      </div>
+    </b:if>
+
+  </div>
+</b:includable>
+        <b:includable id='feedLinks'>
+  <b:if cond='data:blog.pageType != &quot;item&quot;'> <!-- Blog feed links -->
+    <b:if cond='data:feedLinks'>
+      <div class='blog-feeds'>
+        <b:include data='feedLinks' name='feedLinksBody'/>
+      </div>
+    </b:if>
+
+  <b:else/> <!--Post feed links -->
+    <div class='post-feeds'>
+      <b:loop values='data:posts' var='post'>
+        <b:include cond='data:post.allowComments and data:post.feedLinks' data='post.feedLinks' name='feedLinksBody'/>
+      </b:loop>
+    </div>
+  </b:if>
+</b:includable>
+        <b:includable id='feedLinksBody' var='links'>
+  <div class='feed-links'>
+  <data:feedLinksMsg/>
+  <b:loop values='data:links' var='f'>
+     <a class='feed-link' expr:href='data:f.url' expr:type='data:f.mimeType' target='_blank'><data:f.name/> (<data:f.feedType/>)</a>
+  </b:loop>
+  </div>
+</b:includable>
+        <b:includable id='iframe_comments' var='post'>
+  <!-- G+ comments, no longer available. The includable is retained for backwards-compatibility. -->
+</b:includable>
+        <b:includable id='mobile-index-post' var='post'>
+  <div class='mobile-date-outer date-outer'>
+    <b:if cond='data:post.dateHeader'>
+      <div class='date-header'>
+        <span><data:post.dateHeader/></span>
+      </div>
+    </b:if>
+
+    <div class='mobile-post-outer'>
+      <a expr:href='data:post.url'>
+        <h3 class='mobile-index-title entry-title' itemprop='name'>
+          <data:post.title/>
+        </h3>
+
+        <div class='mobile-index-arrow'>&amp;rsaquo;</div>
+
+        <div class='mobile-index-contents'>
+          <b:if cond='data:post.thumbnailUrl'>
+            <div class='mobile-index-thumbnail'>
+              <div class='Image'>
+                <img expr:src='data:post.thumbnailUrl'/>
+              </div>
+            </div>
+          </b:if>
+
+          <div class='post-body'>
+            <b:if cond='data:post.snippet'><data:post.snippet/></b:if>
+          </div>
+        </div>
+
+        <div style='clear: both;'/>
+      </a>
+
+      <div class='mobile-index-comment'>
+        <b:include cond='data:blog.pageType != &quot;static_page&quot;                          and data:post.allowComments                          and data:post.numComments != 0' data='post' name='comment_count_picker'/>
+      </div>
+    </div>
+  </div>
+</b:includable>
+        <b:includable id='mobile-main' var='top'>
+    <!-- posts -->
+    <div class='blog-posts hfeed'>
+
+      <b:include data='top' name='status-message'/>
+
+      <b:if cond='data:blog.pageType == &quot;index&quot;'>
+        <b:loop values='data:posts' var='post'>
+          <b:include data='post' name='mobile-index-post'/>
+        </b:loop>
+      <b:else/>
+        <b:loop values='data:posts' var='post'>
+          <b:include data='post' name='mobile-post'/>
+        </b:loop>
+      </b:if>
+    </div>
+
+   <b:include name='mobile-nextprev'/>
+</b:includable>
+        <b:includable id='mobile-nextprev'>
+  <div class='blog-pager' id='blog-pager'>
+    <b:if cond='data:newerPageUrl'>
+      <div class='mobile-link-button' id='blog-pager-newer-link'>
+      <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'>&amp;lsaquo;</a>
+      </div>
+    </b:if>
+
+    <b:if cond='data:olderPageUrl'>
+      <div class='mobile-link-button' id='blog-pager-older-link'>
+      <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>&amp;rsaquo;</a>
+      </div>
+    </b:if>
+
+    <div class='mobile-link-button' id='blog-pager-home-link'>
+    <a class='home-link' expr:href='data:blog.homepageUrl'><data:homeMsg/></a>
+    </div>
+
+    <div class='mobile-desktop-link'>
+      <a class='home-link' expr:href='data:desktopLinkUrl'><data:desktopLinkMsg/></a>
+    </div>
+
+  </div>
+  <div class='clear'/>
+</b:includable>
+        <b:includable id='mobile-post' var='post'>
+  <div class='date-outer'>
+    <b:if cond='data:post.dateHeader'>
+      <h2 class='date-header'><span><data:post.dateHeader/></span></h2>
+    </b:if>
+    <div class='date-posts'>
+      <div class='post-outer'>
+
+        <div class='post hentry uncustomized-post-template' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+          <b:if cond='data:post.thumbnailUrl'>
+            <meta expr:content='data:post.thumbnailUrl' itemprop='image_url'/>
+          </b:if>
+          <meta expr:content='data:blog.blogId' itemprop='blogId'/>
+          <meta expr:content='data:post.id' itemprop='postId'/>
+
+          <a expr:name='data:post.id'/>
+          <b:if cond='data:post.title'>
+            <h3 class='post-title entry-title' itemprop='name'>
+              <b:if cond='data:post.link'>
+                <a expr:href='data:post.link'><data:post.title/></a>
+              <b:elseif cond='data:post.url and data:blog.url != data:post.url'/>
+                <a expr:href='data:post.url'><data:post.title/></a>
+              <b:else/>
+                <data:post.title/>
+              </b:if>
+            </h3>
+          </b:if>
+
+          <div class='post-header'>
+            <div class='post-header-line-1'/>
+          </div>
+
+          <div class='post-body entry-content' expr:id='&quot;post-body-&quot; + data:post.id' itemprop='articleBody'>
+            <data:post.body/>
+            <div style='clear: both;'/> <!-- clear for photos floats -->
+          </div>
+
+          <div class='post-footer'>
+            <div class='post-footer-line post-footer-line-1'>
+              <span class='post-author vcard'>
+                <b:if cond='data:top.showAuthor'>
+                  <b:if cond='data:post.authorProfileUrl'>
+                    <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+                      <meta expr:content='data:post.authorProfileUrl' itemprop='url'/>
+                      <a expr:href='data:post.authorProfileUrl' rel='author' title='author profile'>
+                        <span itemprop='name'><data:post.author/></span>
+                      </a>
+                    </span>
+                  <b:else/>
+                    <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+                      <span itemprop='name'><data:post.author/></span>
+                    </span>
+                  </b:if>
+                </b:if>
+              </span>
+
+              <span class='post-timestamp'>
+                <b:if cond='data:top.showTimestamp'>
+                  <data:top.timestampLabel/>
+                  <b:if cond='data:post.url'>
+                    <meta expr:content='data:post.url.canonical' itemprop='url'/>
+                    <a class='timestamp-link' expr:href='data:post.url' rel='bookmark' title='permanent link'><abbr class='published' expr:title='data:post.timestampISO8601' itemprop='datePublished'><data:post.timestamp/></abbr></a>
+                  </b:if>
+                </b:if>
+              </span>
+
+              <span class='post-comment-link'>
+                <b:include cond='data:blog.pageType not in {&quot;item&quot;,&quot;static_page&quot;}                                  and data:post.allowComments' data='post' name='comment_count_picker'/>
+              </span>
+            </div>
+
+            <div class='post-footer-line post-footer-line-2'>
+              <b:if cond='data:top.showMobileShare'>
+                <div class='mobile-link-button goog-inline-block' id='mobile-share-button'>
+                  <a href='javascript:void(0);'><data:shareMsg/></a>
+                </div>
+              </b:if>
+            </div>
+
+          </div>
+        </div>
+
+        <b:include cond='data:blog.pageType in {&quot;static_page&quot;,&quot;item&quot;}' data='post' name='comment_picker'/>
+      </div>
+    </div>
+  </div>
+</b:includable>
+        <b:includable id='nextprev'>
+  <div class='blog-pager' id='blog-pager'>
+    <b:if cond='data:newerPageUrl'>
+      <span id='blog-pager-newer-link'>
+      <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'><data:newerPageTitle/></a>
+      </span>
+    </b:if>
+
+    <b:if cond='data:olderPageUrl'>
+      <span id='blog-pager-older-link'>
+      <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'><data:olderPageTitle/></a>
+      </span>
+    </b:if>
+
+    <a class='home-link' expr:href='data:blog.homepageUrl'><data:homeMsg/></a>
+
+    <b:if cond='data:mobileLinkUrl'>
+      <div class='blog-mobile-link'>
+        <a expr:href='data:mobileLinkUrl'><data:mobileLinkMsg/></a>
+      </div>
+    </b:if>
+
+  </div>
+  <div class='clear'/>
+</b:includable>
+        <b:includable id='post' var='post'>
+  <div class='post hentry uncustomized-post-template' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+    <b:if cond='data:post.firstImageUrl'>
+      <meta expr:content='data:post.firstImageUrl' itemprop='image_url'/>
+    </b:if>
+    <meta expr:content='data:blog.blogId' itemprop='blogId'/>
+    <meta expr:content='data:post.id' itemprop='postId'/>
+
+    <a expr:name='data:post.id'/>
+    <b:if cond='data:post.title'>
+      <h3 class='post-title entry-title' itemprop='name'>
+      <b:if cond='data:post.link or (data:post.url and data:blog.url != data:post.url)'>
+        <a expr:href='data:post.link ? data:post.link : data:post.url'><data:post.title/></a>
+      <b:else/>
+        <data:post.title/>
+      </b:if>
+      </h3>
+    </b:if>
+
+    <div class='post-header'>
+    <div class='post-header-line-1'/>
+    </div>
+
+    <!-- Then use the post body as the schema.org description, for good G+/FB snippeting. -->
+    <div class='post-body entry-content' expr:id='&quot;post-body-&quot; + data:post.id' expr:itemprop='(data:blog.metaDescription ? &quot;&quot; : &quot;description &quot;) + &quot;articleBody&quot;'>
+      <data:post.body/>
+      <div style='clear: both;'/> <!-- clear for photos floats -->
+    </div>
+
+    <b:if cond='data:post.hasJumpLink'>
+      <div class='jump-link'>
+        <a expr:href='data:post.url + &quot;#more&quot;' expr:title='data:post.title'><data:post.jumpText/></a>
+      </div>
+    </b:if>
+
+    <div class='post-footer'>
+    <div class='post-footer-line post-footer-line-1'>
+      <span class='post-author vcard'>
+        <b:if cond='data:top.showAuthor'>
+          <data:top.authorLabel/>
+            <b:if cond='data:post.authorProfileUrl'>
+              <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+                <meta expr:content='data:post.authorProfileUrl' itemprop='url'/>
+                <a class='g-profile' expr:href='data:post.authorProfileUrl' rel='author' title='author profile'>
+                  <span itemprop='name'><data:post.author/></span>
+                </a>
+              </span>
+            <b:else/>
+              <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+                <span itemprop='name'><data:post.author/></span>
+              </span>
+            </b:if>
+        </b:if>
+      </span>
+
+      <span class='post-timestamp'>
+        <b:if cond='data:top.showTimestamp'>
+          <data:top.timestampLabel/>
+          <b:if cond='data:post.url'>
+            <meta expr:content='data:post.url.canonical' itemprop='url'/>
+            <a class='timestamp-link' expr:href='data:post.url' rel='bookmark' title='permanent link'><abbr class='published' expr:title='data:post.timestampISO8601' itemprop='datePublished'><data:post.timestamp/></abbr></a>
+          </b:if>
+        </b:if>
+      </span>
+
+      <span class='post-comment-link'>
+        <b:include cond='data:blog.pageType not in {&quot;item&quot;,&quot;static_page&quot;}                          and data:post.allowComments' data='post' name='comment_count_picker'/>
+      </span>
+
+      <span class='post-icons'>
+        <!-- email post links -->
+        <b:if cond='data:post.emailPostUrl'>
+          <span class='item-action'>
+          <a expr:href='data:post.emailPostUrl' expr:title='data:top.emailPostMsg'>
+            <img alt='' class='icon-action' height='13' src='https://resources.blogblog.com/img/icon18_email.gif' width='18'/>
+          </a>
+          </span>
+        </b:if>
+
+        <!-- quickedit pencil -->
+        <b:include data='post' name='postQuickEdit'/>
+      </span>
+
+      <!-- share buttons -->
+      <div class='post-share-buttons goog-inline-block'>
+        <b:include cond='data:post.sharePostUrl' data='post' name='shareButtons'/>
+      </div>
+
+      </div>
+
+      <div class='post-footer-line post-footer-line-2'>
+      <span class='post-labels'>
+        <b:if cond='data:top.showPostLabels and data:post.labels'>
+          <data:postLabelsLabel/>
+          <b:loop values='data:post.labels' var='label'>
+            <a expr:href='data:label.url' rel='tag'><data:label.name/></a><b:if cond='not data:label.isLast'>,</b:if>
+          </b:loop>
+        </b:if>
+      </span>
+      </div>
+
+      <div class='post-footer-line post-footer-line-3'>
+      <span class='post-location'>
+        <b:if cond='data:top.showLocation and data:post.location'>
+          <data:postLocationLabel/>
+          <a expr:href='data:post.location.mapsUrl' target='_blank'><data:post.location.name/></a>
+        </b:if>
+      </span>
+      </div>
+      <b:if cond='data:post.authorAboutMe'>
+        <div class='author-profile' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+          <b:if cond='data:post.authorPhoto.url'>
+            <img expr:src='data:post.authorPhoto.url' itemprop='image' width='50px'/>
+          </b:if>
+          <div>
+            <a class='g-profile' expr:href='data:post.authorProfileUrl' itemprop='url' rel='author' title='author profile'>
+              <span itemprop='name'><data:post.author/></span>
+            </a>
+          </div>
+          <span itemprop='description'><data:post.authorAboutMe/></span>
+        </div>
+      </b:if>
+    </div>
+  </div>
+</b:includable>
+        <b:includable id='postQuickEdit' var='post'>
+  <b:if cond='data:post.editUrl'>
+    <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
+      <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg'>
+        <img alt='' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
+      </a>
+    </span>
+  </b:if>
+</b:includable>
+        <b:includable id='shareButtons' var='post'>
+  <b:if cond='data:top.showEmailButton'><a class='goog-inline-block share-button sb-email' expr:href='data:post.sharePostUrl + &quot;&amp;target=email&quot;' expr:title='data:top.emailThisMsg' target='_blank'><span class='share-button-link-text'><data:top.emailThisMsg/></span></a></b:if><b:if cond='data:top.showBlogThisButton'><a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=270,width=475\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'><span class='share-button-link-text'><data:top.blogThisMsg/></span></a></b:if><b:if cond='data:top.showTwitterButton'><a class='goog-inline-block share-button sb-twitter' expr:href='data:post.sharePostUrl + &quot;&amp;target=twitter&quot;' expr:title='data:top.shareToTwitterMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToTwitterMsg/></span></a></b:if><b:if cond='data:top.showFacebookButton'><a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToFacebookMsg/></span></a></b:if><b:if cond='data:top.showPinterestButton'><a class='goog-inline-block share-button sb-pinterest' expr:href='data:post.sharePostUrl + &quot;&amp;target=pinterest&quot;' expr:title='data:top.shareToPinterestMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToPinterestMsg/></span></a></b:if>
+</b:includable>
+        <b:includable id='status-message'>
+  <b:if cond='data:navMessage'>
+  <div class='status-msg-wrap'>
+    <div class='status-msg-body'>
+      <data:navMessage/>
+    </div>
+    <div class='status-msg-border'>
+      <div class='status-msg-bg'>
+        <div class='status-msg-hidden'><data:navMessage/></div>
+      </div>
+    </div>
+  </div>
+  <div style='clear: both;'/>
+  </b:if>
+</b:includable>
+        <b:includable id='threaded-comment-form' var='post'>
+  <div class='comment-form'>
+    <a name='comment-form'/>
+    <b:if cond='data:mobile'>
+      <p><data:blogCommentMessage/></p>
+      <data:blogTeamBlogMessage/>
+      <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+      <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight' frameborder='0' id='comment-editor' name='comment-editor' src='' style='display: none' width='100%'/>
+    <b:else/>
+      <p><data:blogCommentMessage/></p>
+      <data:blogTeamBlogMessage/>
+      <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+      <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+    </b:if>
+    <data:post.cmtfpIframe/>
+    <script type='text/javascript'>
+      BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+    </script>
+  </div>
+</b:includable>
+        <b:includable id='threaded_comment_js' var='post'>
+  <script async='async' expr:src='data:post.commentSrc' type='text/javascript'/>
+
+  <script type='text/javascript'>
+    (function() {
+      var items = <data:post.commentJso/>;
+      var msgs = <data:post.commentMsgs/>;
+      var config = <data:post.commentConfig/>;
+
+// <![CDATA[
+      var cursor = null;
+      if (items && items.length > 0) {
+        cursor = parseInt(items[items.length - 1].timestamp) + 1;
+      }
+
+      var bodyFromEntry = function(entry) {
+        var text = (entry &&
+                    ((entry.content && entry.content.$t) ||
+                     (entry.summary && entry.summary.$t))) ||
+            '';
+        if (entry && entry.gd$extendedProperty) {
+          for (var k in entry.gd$extendedProperty) {
+            if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
+              return '<span class="deleted-comment">' + text + '</span>';
+            }
+          }
+        }
+        return text;
+      }
+
+      var parse = function(data) {
+        cursor = null;
+        var comments = [];
+        if (data && data.feed && data.feed.entry) {
+          for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+            var comment = {};
+            // comment ID, parsed out of the original id format
+            var id = /blog-(\d+).post-(\d+)/.exec(entry.id.$t);
+            comment.id = id ? id[2] : null;
+            comment.body = bodyFromEntry(entry);
+            comment.timestamp = Date.parse(entry.published.$t) + '';
+            if (entry.author && entry.author.constructor === Array) {
+              var auth = entry.author[0];
+              if (auth) {
+                comment.author = {
+                  name: (auth.name ? auth.name.$t : undefined),
+                  profileUrl: (auth.uri ? auth.uri.$t : undefined),
+                  avatarUrl: (auth.gd$image ? auth.gd$image.src : undefined)
+                };
+              }
+            }
+            if (entry.link) {
+              if (entry.link[2]) {
+                comment.link = comment.permalink = entry.link[2].href;
+              }
+              if (entry.link[3]) {
+                var pid = /.*comments\/default\/(\d+)\?.*/.exec(entry.link[3].href);
+                if (pid && pid[1]) {
+                  comment.parentId = pid[1];
+                }
+              }
+            }
+            comment.deleteclass = 'item-control blog-admin';
+            if (entry.gd$extendedProperty) {
+              for (var k in entry.gd$extendedProperty) {
+                if (entry.gd$extendedProperty[k].name == 'blogger.itemClass') {
+                  comment.deleteclass += ' ' + entry.gd$extendedProperty[k].value;
+                } else if (entry.gd$extendedProperty[k].name == 'blogger.displayTime') {
+                  comment.displayTime = entry.gd$extendedProperty[k].value;
+                }
+              }
+            }
+            comments.push(comment);
+          }
+        }
+        return comments;
+      };
+
+      var paginator = function(callback) {
+        if (hasMore()) {
+          var url = config.feed + '?alt=json&v=2&orderby=published&reverse=false&max-results=50';
+          if (cursor) {
+            url += '&published-min=' + new Date(cursor).toISOString();
+          }
+          window.bloggercomments = function(data) {
+            var parsed = parse(data);
+            cursor = parsed.length < 50 ? null
+                : parseInt(parsed[parsed.length - 1].timestamp) + 1
+            callback(parsed);
+            window.bloggercomments = null;
+          }
+          url += '&callback=bloggercomments';
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      };
+      var hasMore = function() {
+        return !!cursor;
+      };
+      var getMeta = function(key, comment) {
+        if ('iswriter' == key) {
+          var matches = !!comment.author
+              && comment.author.name == config.authorName
+              && comment.author.profileUrl == config.authorUrl;
+          return matches ? 'true' : '';
+        } else if ('deletelink' == key) {
+          return config.baseUri + '/comment/delete/'
+               + config.blogId + '/' + comment.id;
+        } else if ('deleteclass' == key) {
+          return comment.deleteclass;
+        }
+        return '';
+      };
+
+      var replybox = null;
+      var replyUrlParts = null;
+      var replyParent = undefined;
+
+      var onReply = function(commentId, domId) {
+        if (replybox == null) {
+          // lazily cache replybox, and adjust to suit this style:
+          replybox = document.getElementById('comment-editor');
+          if (replybox != null) {
+            replybox.height = '250px';
+            replybox.style.display = 'block';
+            replyUrlParts = replybox.src.split('#');
+          }
+        }
+        if (replybox && (commentId !== replyParent)) {
+          replybox.src = '';
+          document.getElementById(domId).insertBefore(replybox, null);
+          replybox.src = replyUrlParts[0]
+              + (commentId ? '&parentID=' + commentId : '')
+              + '#' + replyUrlParts[1];
+          replyParent = commentId;
+        }
+      };
+
+      var hash = (window.location.hash || '#').substring(1);
+      var startThread, targetComment;
+      if (/^comment-form_/.test(hash)) {
+        startThread = hash.substring('comment-form_'.length);
+      } else if (/^c[0-9]+$/.test(hash)) {
+        targetComment = hash.substring(1);
+      }
+
+      // Configure commenting API:
+      var configJso = {
+        'maxDepth': config.maxThreadDepth
+      };
+      var provider = {
+        'id': config.postId,
+        'data': items,
+        'loadNext': paginator,
+        'hasMore': hasMore,
+        'getMeta': getMeta,
+        'onReply': onReply,
+        'rendered': true,
+        'initComment': targetComment,
+        'initReplyThread': startThread,
+        'config': configJso,
+        'messages': msgs
+      };
+
+      var render = function() {
+        if (window.goog && window.goog.comments) {
+          var holder = document.getElementById('comment-holder');
+          window.goog.comments.render(holder, provider);
+        }
+      };
+
+      // render now, or queue to render when library loads:
+      if (window.goog && window.goog.comments) {
+        render();
+      } else {
+        window.goog = window.goog || {};
+        window.goog.comments = window.goog.comments || {};
+        window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
+        window.goog.comments.loadQueue.push(render);
+      }
+    })();
+// ]]>
+  </script>
+</b:includable>
+        <b:includable id='threaded_comments' var='post'>
+  <div class='comments' id='comments'>
+    <a name='comments'/>
+    <h4><data:post.commentLabelFull/>:</h4>
+
+    <div class='comments-content'>
+      <b:include cond='data:post.embedCommentForm' data='post' name='threaded_comment_js'/>
+      <div id='comment-holder'>
+         <data:post.commentHtml/>
+      </div>
+    </div>
+
+    <p class='comment-footer'>
+      <b:if cond='data:post.allowNewComments'>
+        <b:include data='post' name='threaded-comment-form'/>
+      <b:else/>
+        <data:post.noNewCommentsText/>
+      </b:if>
+    </p>
+
+    <b:if cond='data:showCmtPopup'>
+      <div id='comment-popup'>
+        <iframe allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'>
+        </iframe>
+      </div>
+    </b:if>
+
+    <div id='backlinks-container'>
+    <div expr:id='data:widget.instanceId + &quot;_backlinks-container&quot;'>
+    </div>
+    </div>
+  </div>
+</b:includable>
+      </b:widget>
+    </b:section>
+</body>
+</html>
