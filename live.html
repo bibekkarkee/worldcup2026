@@ -1,0 +1,4264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#06141F" />
+  <title>WC 2026 · Elite Prediction Pool</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       DESIGN SYSTEM — FIFA World Cup 2026 · Premium Edition
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      --bg: #06141F;
+      --surface: #0E2233;
+      --surface-light: #1A3A4F;
+      --card: rgba(14, 34, 51, 0.85);
+      --card-border: rgba(0, 212, 255, 0.12);
+      --cyan: #00D4FF;
+      --cyan-dim: rgba(0, 212, 255, 0.15);
+      --gold: #FFD700;
+      --gold-dim: rgba(255, 215, 0, 0.12);
+      --green: #00E676;
+      --red: #FF5252;
+      --text: #FFFFFF;
+      --text-muted: #AAB4BE;
+      --text-dim: #4A6A7A;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --t: 0.25s;
+    }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(ellipse at 20% 0%, rgba(0, 212, 255, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(255, 215, 0, 0.03) 0%, transparent 60%);
+    }
+    button,
+    input,
+    select {
+      font-family: inherit;
+    }
+    button {
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--cyan-dim);
+      border-radius: 4px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ─── GLASS CARD ─── */
+    .glass {
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow), var(--shadow-glow);
+    }
+
+    /* ─── LOADER ─── */
+    #pageLoader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      transition: opacity 0.6s var(--ease), visibility 0.6s;
+    }
+    #pageLoader.out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-ring {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: var(--cyan);
+      border-right-color: var(--gold);
+      animation: spin 0.8s linear infinite;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .loader-brand {
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 0.12em;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulseText 1.8s ease-in-out infinite;
+    }
+    @keyframes pulseText {
+      0%,
+      100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+    .loader-bar {
+      width: 180px;
+      height: 2px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .loader-bar-fill {
+      height: 100%;
+      width: 40%;
+      background: linear-gradient(90deg, var(--cyan), var(--gold));
+      border-radius: 2px;
+      animation: barMove 1.2s ease-in-out infinite;
+    }
+    @keyframes barMove {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(350%);
+      }
+    }
+    .loader-status {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ─── LOGIN SCREEN ─── */
+    #loginScreen {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+    }
+    .login-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+    }
+    .login-orb.a {
+      width: 500px;
+      height: 500px;
+      background: var(--cyan);
+      opacity: 0.05;
+      top: -200px;
+      right: -200px;
+      animation: orbFloat 12s ease-in-out infinite;
+    }
+    .login-orb.b {
+      width: 400px;
+      height: 400px;
+      background: var(--gold);
+      opacity: 0.04;
+      bottom: -150px;
+      left: -150px;
+      animation: orbFloat 14s ease-in-out infinite reverse 2s;
+    }
+    @keyframes orbFloat {
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+      33% {
+        transform: translate(40px, -30px);
+      }
+      66% {
+        transform: translate(-30px, 40px);
+      }
+    }
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 2;
+      background: var(--card);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      animation: loginRise 0.6s var(--ease) both;
+      box-shadow: var(--shadow), var(--shadow-glow);
+    }
+    @keyframes loginRise {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .login-card-top {
+      padding: 32px 28px 0;
+      text-align: center;
+    }
+    .login-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan-dim), var(--gold-dim));
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+    @keyframes floatIcon {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+    .login-title {
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .login-title span {
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .login-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .login-players {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      margin: 14px 0 20px;
+    }
+    .login-card-body {
+      padding: 0 28px 28px;
+    }
+    .lf {
+      margin-bottom: 14px;
+    }
+    .lf-label {
+      display: block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .lf-wrap {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      transition: border-color var(--t), box-shadow var(--t);
+      min-height: 50px;
+    }
+    .lf-wrap:focus-within {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px var(--cyan-dim);
+    }
+    .lf-icon {
+      padding: 0 12px;
+      color: var(--text-dim);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .lf-wrap select,
+    .lf-wrap input {
+      flex: 1;
+      min-height: 50px;
+      padding: 12px 14px 12px 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .lf-wrap select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300D4FF' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+    .lf-wrap select option {
+      background: var(--surface);
+    }
+    #pinInput {
+      letter-spacing: 8px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      font-family: monospace;
+    }
+    .pin-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 6px 0 0;
+      height: 0;
+      overflow: hidden;
+      transition: height 0.2s;
+    }
+    .pin-dots.show {
+      height: 24px;
+    }
+    .pin-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--card-border);
+      transition: all 0.2s;
+    }
+    .pin-dot.filled {
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+    }
+    .btn-primary {
+      width: 100%;
+      min-height: 52px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--cyan), #0099cc);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      transition: transform var(--t), box-shadow var(--t);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.25);
+      position: relative;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+      background-size: 300% 100%;
+      background-position: 200% 0;
+      transition: background-position 0.6s var(--ease);
+    }
+    .btn-primary:active:not(:disabled)::before {
+      background-position: -100% 0;
+    }
+    .btn-primary:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .login-msg {
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: msgIn 0.2s var(--ease);
+    }
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .login-msg.error {
+      background: rgba(255, 82, 82, 0.1);
+      color: var(--red);
+      border: 1px solid rgba(255, 82, 82, 0.2);
+    }
+    .login-msg.info {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border: 1px solid var(--card-border);
+    }
+    .login-footer {
+      border-top: 1px solid var(--card-border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+    .login-secure {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .login-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 215, 0, 0.15);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── DASHBOARD ─── */
+    #dashScreen {
+      display: none;
+      min-height: 100dvh;
+      padding: 0 16px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 20, 31, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      margin: 0 -16px;
+      padding: 12px 16px;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .topbar-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--bg);
+    }
+    .topbar-title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px 4px 4px;
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+    }
+    .topbar-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.7rem;
+      color: var(--bg);
+    }
+    .topbar-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      max-width: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .topbar-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      background: transparent;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all var(--t);
+      position: relative;
+    }
+    .topbar-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .topbar-btn:active {
+      transform: scale(0.88);
+    }
+    .topbar-btn.spin {
+      animation: spin 0.7s linear infinite;
+    }
+    .badge-dot {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 14px;
+      height: 14px;
+      background: var(--red);
+      border-radius: 50%;
+      font-size: 0.45rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg);
+    }
+    .badge-dot.hidden {
+      display: none;
+    }
+
+    /* ─── STATS STRIP ─── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+    @media (max-width: 640px) {
+      .stats-strip {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+    }
+    .stat-card {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      text-align: center;
+      transition: transform var(--t), border-color var(--t);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--gold));
+      opacity: 0;
+      transition: opacity var(--t);
+    }
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 212, 255, 0.2);
+    }
+    .stat-icon {
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .stat-value {
+      font-weight: 900;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--gold);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-value .stat-of {
+      font-size: 0.4em;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+    .stat-label {
+      font-size: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      margin-top: 3px;
+      font-weight: 700;
+    }
+
+    /* ─── NAV TABS ─── */
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      overflow-x: auto;
+      margin-bottom: 18px;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .nav-tab {
+      flex-shrink: 0;
+      min-height: 38px;
+      padding: 0 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: all var(--t);
+      white-space: nowrap;
+    }
+    .nav-tab.active {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: 0 4px 16px rgba(0, 212, 255, 0.25);
+    }
+    .nav-tab:active {
+      transform: scale(0.95);
+    }
+    .nav-tab .tab-icon {
+      margin-right: 4px;
+    }
+
+    /* ─── PANELS ─── */
+    .tab-panel {
+      display: none;
+      animation: panelIn 0.3s var(--ease);
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes panelIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .section-title {
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::before {
+      content: '';
+      width: 3px;
+      height: 20px;
+      background: linear-gradient(to bottom, var(--cyan), var(--gold));
+      border-radius: 2px;
+      box-shadow: 0 0 16px rgba(0, 212, 255, 0.2);
+    }
+    .section-sub {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ─── CHIPS ─── */
+    .chip-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .chip-row::-webkit-scrollbar {
+      display: none;
+    }
+    .chip {
+      flex-shrink: 0;
+      min-height: 30px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all var(--t);
+    }
+    .chip:active {
+      transform: scale(0.92);
+    }
+    .chip.active {
+      background: var(--cyan-dim);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .chip .cnt {
+      font-size: 0.6em;
+      opacity: 0.6;
+    }
+    .chip .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+    }
+    .date-nav {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      background: var(--surface);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      transition: all var(--t);
+    }
+    .date-nav:active {
+      transform: scale(0.87);
+    }
+    .date-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    /* ─── MATCH GRID ─── */
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .match-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .match-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ─── MATCH CARD ─── */
+    .mcard {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+      animation: cardIn 0.35s var(--ease) both;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .mcard:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 212, 255, 0.2);
+      box-shadow: var(--shadow), var(--shadow-glow);
+    }
+    .mcard::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 0 2px 2px 0;
+      background: transparent;
+      transition: background var(--t);
+    }
+    .mcard.sc::before {
+      background: var(--green);
+    }
+    .mcard.sr::before {
+      background: var(--gold);
+    }
+    .mcard.sw::before {
+      background: var(--red);
+    }
+    .mcard.sl::before {
+      background: var(--cyan);
+    }
+    .mcard.sc {
+      border-color: rgba(0, 230, 118, 0.3);
+    }
+    .mcard.sr {
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+    .mcard.sw {
+      border-color: rgba(255, 82, 82, 0.25);
+    }
+    .mcard.sl {
+      border-color: rgba(0, 212, 255, 0.25);
+    }
+
+    .mc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .mc-stage {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .mc-stage .grp {
+      color: var(--gold);
+    }
+    .mc-badge {
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .mc-badge.open {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+    }
+    .mc-badge.locked {
+      background: rgba(255, 215, 0, 0.08);
+      color: var(--gold);
+      border: 1px solid rgba(255, 215, 0, 0.15);
+    }
+    .mc-badge.ended {
+      background: rgba(255, 82, 82, 0.08);
+      color: var(--red);
+      border: 1px solid rgba(255, 82, 82, 0.15);
+    }
+
+    .mc-date {
+      text-align: center;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .mc-nepali {
+      text-align: center;
+      font-size: 0.55rem;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 1px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      display: inline-block;
+      margin: 2px auto 6px;
+    }
+
+    .mc-teams {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 6px 0 8px;
+      width: 100%;
+    }
+    .mc-team {
+      flex: 1;
+      max-width: 40%;
+      text-align: center;
+    }
+    .mc-team .fi {
+      font-size: 2.2rem;
+      display: block;
+      margin: 0 auto 4px;
+      border-radius: 2px;
+    }
+    .mc-team .tname {
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 1.2;
+    }
+    .mc-vs {
+      flex-shrink: 0;
+      min-width: 48px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+    .mc-score {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--gold);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 215, 0, 0.15);
+      white-space: nowrap;
+    }
+
+    /* ─── PRED BANNER ─── */
+    .pred-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .pred-banner .pb-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .pred-banner .pb-info {
+      flex: 1;
+      min-width: 80px;
+    }
+    .pred-banner .pb-label {
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .pred-banner .pb-sub {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+    .pred-banner .pb-pts {
+      font-weight: 900;
+      font-size: 0.85rem;
+      padding: 3px 12px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+    .pred-banner.exact {
+      background: rgba(0, 230, 118, 0.06);
+      border: 1px solid rgba(0, 230, 118, 0.15);
+    }
+    .pred-banner.exact .pb-label {
+      color: var(--green);
+    }
+    .pred-banner.exact .pb-pts {
+      background: rgba(0, 230, 118, 0.1);
+      color: var(--green);
+    }
+    .pred-banner.result {
+      background: rgba(255, 215, 0, 0.06);
+      border: 1px solid rgba(255, 215, 0, 0.15);
+    }
+    .pred-banner.result .pb-label {
+      color: var(--gold);
+    }
+    .pred-banner.result .pb-pts {
+      background: rgba(255, 215, 0, 0.1);
+      color: var(--gold);
+    }
+    .pred-banner.wrong {
+      background: rgba(255, 82, 82, 0.05);
+      border: 1px solid rgba(255, 82, 82, 0.12);
+    }
+    .pred-banner.wrong .pb-label {
+      color: var(--red);
+    }
+    .pred-banner.wrong .pb-pts {
+      background: rgba(255, 82, 82, 0.08);
+      color: var(--red);
+    }
+    .pred-banner.pending {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed var(--card-border);
+    }
+    .pred-banner.none {
+      background: transparent;
+      border: 1px dashed var(--card-border);
+    }
+
+    /* ─── SCORE PICKER ─── */
+    .score-picker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 10px 0;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+    }
+    .score-unit {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .score-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: var(--surface);
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--t);
+      flex-shrink: 0;
+    }
+    .score-btn:active:not(:disabled) {
+      transform: scale(0.8);
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+    .score-btn:disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+    .score-digit {
+      width: 44px;
+      height: 50px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .score-digit input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--gold);
+      text-align: center;
+      -moz-appearance: textfield;
+      font-family: inherit;
+    }
+    .score-digit input::-webkit-outer-spin-button,
+    .score-digit input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+    .score-digit.flip {
+      animation: digitFlip 0.25s var(--ease);
+    }
+    @keyframes digitFlip {
+      0% {
+        transform: rotateX(0);
+      }
+      45% {
+        transform: rotateX(90deg);
+      }
+      55% {
+        transform: rotateX(-90deg);
+      }
+      100% {
+        transform: rotateX(0);
+      }
+    }
+    .score-sep {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      padding: 0 2px;
+    }
+
+    .save-tick {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--surface);
+      border: 2px solid var(--card-border);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s var(--ease);
+      opacity: 0;
+      transform: scale(0.6);
+      pointer-events: none;
+    }
+    .save-tick.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .save-tick.pending {
+      border-color: var(--cyan);
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+      animation: tickPulse 0.5s var(--ease);
+    }
+    .save-tick.saving {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+      color: var(--gold);
+      animation: spin 0.8s linear infinite;
+    }
+    .save-tick.saved {
+      border-color: var(--green);
+      background: rgba(0, 230, 118, 0.1);
+      color: var(--green);
+      box-shadow: 0 0 24px rgba(0, 230, 118, 0.2);
+    }
+    .save-tick.error {
+      border-color: var(--red);
+      background: rgba(255, 82, 82, 0.1);
+      color: var(--red);
+    }
+    @keyframes tickPulse {
+      0% {
+        transform: scale(0.7);
+      }
+      50% {
+        transform: scale(1.15);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .lock-note {
+      text-align: center;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      margin-top: 6px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(255, 215, 0, 0.06);
+      border: 1px dashed rgba(255, 215, 0, 0.15);
+    }
+    .ended-note {
+      text-align: center;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      margin-top: 6px;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+    }
+
+    /* ─── PRED BARS ─── */
+    .pred-bars {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin: 6px 0;
+    }
+    .pred-bar-wrap {
+      flex: 1;
+    }
+    .pred-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .pred-bar-track {
+      height: 3px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .pred-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.8s var(--ease);
+    }
+    .pred-bar-fill.home {
+      background: linear-gradient(90deg, var(--cyan), #0099cc);
+    }
+    .pred-bar-fill.away {
+      background: linear-gradient(90deg, var(--gold), #cc9900);
+    }
+    .pred-bar-center {
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ─── FORM GUIDE ─── */
+    .form-guide {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.55rem;
+      color: var(--text-dim);
+    }
+    .fg-lbl {
+      font-weight: 700;
+      margin-right: 2px;
+      font-size: 0.5rem;
+      text-transform: uppercase;
+    }
+    .fdot {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.45rem;
+      font-weight: 800;
+    }
+    .fdot.W {
+      background: var(--green);
+      color: var(--bg);
+    }
+    .fdot.L {
+      background: var(--red);
+      color: #fff;
+    }
+    .fdot.D {
+      background: var(--cyan);
+      color: var(--bg);
+    }
+    .fdot.Q {
+      background: var(--surface);
+      color: var(--text-dim);
+    }
+
+    /* ─── CHAMPION CARD ─── */
+    .champion-card {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0, 212, 255, 0.03));
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-top: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .champion-card::before {
+      content: '🏆';
+      position: absolute;
+      right: -8px;
+      top: -12px;
+      font-size: 4rem;
+      opacity: 0.05;
+      transform: rotate(-10deg);
+    }
+    .champion-title {
+      font-weight: 900;
+      color: var(--gold);
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 3px;
+    }
+    .champion-note {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .champion-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .champion-select {
+      flex: 1 1 160px;
+      min-height: 40px;
+      padding: 0 36px 0 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 0.85rem;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FFD700' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+    .champion-select option {
+      background: var(--surface);
+    }
+    .champion-select:focus {
+      border-color: var(--gold);
+      outline: none;
+      box-shadow: 0 0 0 3px var(--gold-dim);
+    }
+    .champion-status {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--green);
+      width: 100%;
+      margin-top: 4px;
+    }
+    .champion-status.error {
+      color: var(--red);
+    }
+
+    /* ─── LEADERBOARD ─── */
+    .lb-container {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .lb-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--card-border);
+      transition: background var(--t);
+      animation: lbIn 0.3s var(--ease) both;
+    }
+    .lb-row:last-child {
+      border-bottom: none;
+    }
+    .lb-row:hover {
+      background: rgba(0, 212, 255, 0.03);
+    }
+    @keyframes lbIn {
+      from {
+        opacity: 0;
+        transform: translateX(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .lb-pos {
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--text-dim);
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .lb-pos.gold {
+      color: var(--gold);
+    }
+    .lb-pos.silver {
+      color: #a0b0c0;
+    }
+    .lb-pos.bronze {
+      color: #c07050;
+    }
+    .lb-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.8rem;
+      color: var(--bg);
+    }
+    .lb-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .lb-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lb-sub {
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      margin-top: 1px;
+    }
+    .lb-pts {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .lb-change {
+      font-size: 0.55rem;
+      padding: 2px 6px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+    .lb-change.up {
+      background: rgba(0, 230, 118, 0.1);
+      color: var(--green);
+    }
+    .lb-change.same {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-dim);
+    }
+    .lb-progress {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 2px;
+      margin-top: 4px;
+      overflow: hidden;
+    }
+    .lb-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--gold));
+      border-radius: 2px;
+      transition: width 1s var(--ease);
+    }
+
+    /* ─── TABLES ─── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 480px;
+      font-size: 0.8rem;
+    }
+    .data-table thead th {
+      text-align: left;
+      padding: 10px 12px;
+      color: var(--cyan);
+      background: var(--surface);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+    .data-table tbody td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .data-table tbody tr.me {
+      background: rgba(0, 212, 255, 0.04);
+    }
+    .data-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .rank-1 {
+      color: var(--gold);
+      font-weight: 900;
+    }
+    .rank-2 {
+      color: #a0b0c0;
+      font-weight: 800;
+    }
+    .rank-3 {
+      color: #c07050;
+      font-weight: 800;
+    }
+    .group-h {
+      font-weight: 900;
+      color: var(--cyan);
+      font-size: 0.9rem;
+      margin: 16px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .group-h::after {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--card-border), transparent);
+      content: '';
+    }
+
+    /* ─── MINI STATS ─── */
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 480px) {
+      .mini-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .mini-tile {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 6px;
+      text-align: center;
+    }
+    .mini-tile .mi {
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .mini-tile .mv {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+    .mini-tile .ml {
+      font-size: 0.45rem;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .section-h {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin: 14px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ─── BRACKET ─── */
+    .bracket-wrap {
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .bracket {
+      display: flex;
+      gap: 0;
+      align-items: center;
+      min-width: 600px;
+    }
+    .bracket-round {
+      display: flex;
+      flex-direction: column;
+      min-width: 120px;
+    }
+    .bracket-round-title {
+      font-weight: 900;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      text-align: center;
+      padding: 4px 0 8px;
+      text-transform: uppercase;
+    }
+    .bracket-match {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      margin: 3px 6px;
+      padding: 6px 8px;
+      transition: border-color var(--t);
+    }
+    .bracket-match:hover {
+      border-color: var(--card-border);
+    }
+    .bracket-team {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      padding: 1px 0;
+    }
+    .bracket-team .fi {
+      font-size: 0.8rem;
+    }
+    .bracket-team .tn {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .bracket-team .sc {
+      font-weight: 900;
+      font-size: 0.8rem;
+      color: var(--gold);
+    }
+    .bracket-team.winner .tn {
+      color: var(--green);
+    }
+
+    /* ─── PRIZE POOL ─── */
+    .money-card {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0, 212, 255, 0.03));
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+    }
+    .money-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .money-title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .money-total {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+    }
+    .money-total .cur {
+      font-size: 0.5em;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+    .money-breakdown {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .money-prize {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      text-align: center;
+      border: 1px solid var(--card-border);
+    }
+    .money-prize .place {
+      font-weight: 900;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+    }
+    .money-prize.p1 .place {
+      color: var(--gold);
+    }
+    .money-prize.p2 .place {
+      color: #a0b0c0;
+    }
+    .money-prize.p3 .place {
+      color: #c07050;
+    }
+    .money-prize .amount {
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+    .money-prize.p1 .amount {
+      color: var(--gold);
+    }
+    .money-prize.p2 .amount {
+      color: #a0b0c0;
+    }
+    .money-prize.p3 .amount {
+      color: #c07050;
+    }
+    .money-prize .pct {
+      font-size: 0.5rem;
+      color: var(--text-dim);
+    }
+    .money-player {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+    }
+    .money-player .pname {
+      flex: 1;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .money-player .pamount {
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: var(--green);
+    }
+    .money-player .pstatus {
+      font-size: 0.5rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .money-player .pstatus.paid {
+      background: rgba(0, 230, 118, 0.1);
+      color: var(--green);
+    }
+    .money-player .pstatus.pending {
+      background: rgba(255, 215, 0, 0.1);
+      color: var(--gold);
+    }
+
+    /* ─── CHAT ─── */
+    .chat-panel {
+      position: fixed;
+      bottom: calc(76px + env(safe-area-inset-bottom));
+      right: 16px;
+      width: 320px;
+      z-index: 1000;
+      background: var(--card);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      max-height: 420px;
+      animation: chatIn 0.25s var(--ease);
+    }
+    .chat-panel.hidden {
+      display: none;
+    }
+    @keyframes chatIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @media (max-width: 640px) {
+      .chat-panel {
+        right: 0;
+        left: 0;
+        bottom: calc(68px + env(safe-area-inset-bottom));
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        width: auto;
+        max-height: 55dvh;
+      }
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: livePulse 1.4s infinite;
+    }
+    @keyframes livePulse {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.3;
+      }
+    }
+    .chat-title {
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .chat-count {
+      font-size: 0.55rem;
+      color: var(--text-dim);
+    }
+    .chat-close {
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .chat-msg {
+      display: flex;
+      gap: 6px;
+      animation: msgIn 0.2s var(--ease);
+    }
+    .chat-msg.own {
+      flex-direction: row-reverse;
+    }
+    .chat-msg-av {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.65rem;
+      color: var(--bg);
+      margin-top: 2px;
+    }
+    .chat-bubble {
+      max-width: 75%;
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 10px 10px 10px 2px;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+    .chat-msg.own .chat-bubble {
+      background: var(--cyan-dim);
+      border-color: var(--card-border);
+      border-radius: 10px 10px 2px 10px;
+    }
+    .chat-msg .msg-name {
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      margin-bottom: 1px;
+    }
+    .chat-msg .msg-time {
+      font-size: 0.45rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+      text-align: right;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 6px;
+      padding: 8px 12px;
+      border-top: 1px solid var(--card-border);
+    }
+    .chat-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      outline: none;
+      transition: border-color var(--t);
+    }
+    .chat-input:focus {
+      border-color: var(--cyan);
+    }
+    .chat-send {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: var(--cyan);
+      color: var(--bg);
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--t);
+    }
+    .chat-send:active {
+      transform: scale(0.88);
+    }
+
+    /* ─── TOAST ─── */
+    #toastWrap {
+      position: fixed;
+      right: 16px;
+      bottom: calc(80px + env(safe-area-inset-bottom));
+      z-index: 9000;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 6px;
+      max-width: 340px;
+    }
+    .toast {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+      animation: toastIn 0.3s var(--ease);
+      min-width: 200px;
+    }
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateX(16px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .toast.out {
+      animation: toastOut 0.25s var(--ease) forwards;
+    }
+    @keyframes toastOut {
+      to {
+        opacity: 0;
+        transform: translateX(16px) scale(0.96);
+      }
+    }
+    .toast .ti {
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .toast .tt {
+      flex: 1;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .toast .tc {
+      width: 20px;
+      height: 20px;
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      border-radius: 50%;
+    }
+
+    /* ─── NOTIFICATION PANEL ─── */
+    .notif-panel {
+      position: fixed;
+      top: 60px;
+      right: 16px;
+      width: 320px;
+      max-height: 70dvh;
+      z-index: 1000;
+      background: var(--card);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      animation: notifIn 0.25s var(--ease);
+    }
+    .notif-panel.hidden {
+      display: none;
+    }
+    @keyframes notifIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @media (max-width: 640px) {
+      .notif-panel {
+        right: 8px;
+        left: 8px;
+        width: auto;
+        top: 56px;
+      }
+    }
+    .notif-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .notif-title {
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+    .notif-clear {
+      font-size: 0.55rem;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      border: none;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .notif-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px;
+    }
+    .notif-item {
+      display: flex;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 3px;
+      border: 1px solid var(--card-border);
+      transition: background var(--t);
+    }
+    .notif-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .notif-item.unread {
+      background: rgba(0, 212, 255, 0.04);
+      border-color: var(--card-border);
+    }
+    .notif-item .ni-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+    .notif-item .ni-icon.points {
+      background: var(--gold-dim);
+      border: 1px solid rgba(255, 215, 0, 0.15);
+    }
+    .notif-item .ni-icon.reminder {
+      background: var(--cyan-dim);
+      border: 1px solid var(--card-border);
+    }
+    .notif-item .ni-icon.system {
+      background: rgba(255, 82, 82, 0.08);
+      border: 1px solid rgba(255, 82, 82, 0.15);
+    }
+    .notif-item .ni-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .notif-item .ni-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .notif-item .ni-body {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+      line-height: 1.3;
+    }
+    .notif-item .ni-time {
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .notif-empty {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+    }
+
+    /* ─── PRED POPUP ─── */
+    .pred-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 800;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .pred-popup.hidden {
+      display: none;
+    }
+    .pred-popup-card {
+      width: 100%;
+      max-width: 380px;
+      background: var(--card);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      animation: modalIn 0.3s var(--ease);
+      text-align: center;
+    }
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .pred-popup-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .pred-popup-title {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+    .pred-popup-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .pred-popup-matches {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-height: 160px;
+      overflow-y: auto;
+      margin-bottom: 14px;
+    }
+    .ppm-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      font-size: 0.75rem;
+      text-align: left;
+    }
+    .ppm-teams {
+      flex: 1;
+      font-weight: 600;
+    }
+    .ppm-time {
+      font-size: 0.55rem;
+      color: var(--cyan);
+      font-weight: 700;
+    }
+    .pred-popup-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-cyan {
+      flex: 1;
+      min-height: 40px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--cyan), #0099cc);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 0.82rem;
+      transition: transform var(--t);
+    }
+    .btn-cyan:active {
+      transform: scale(0.96);
+    }
+    .btn-ghost {
+      flex: 1;
+      min-height: 40px;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      transition: all var(--t);
+    }
+    .btn-ghost:active {
+      transform: scale(0.96);
+    }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.hidden {
+      display: none;
+    }
+    .modal-card {
+      width: 100%;
+      max-width: 460px;
+      max-height: 85dvh;
+      overflow-y: auto;
+      background: var(--card);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      animation: modalIn 0.3s var(--ease);
+      box-shadow: var(--shadow);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .modal-title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--cyan);
+    }
+    .modal-close {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 50%;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .rules-section {
+      margin-bottom: 14px;
+    }
+    .rules-section h4 {
+      font-weight: 900;
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+    .rules-pts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .rules-pt-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      text-align: center;
+    }
+    .rules-pt-box .pv {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+    .rules-pt-box .pl {
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+    .rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .rules-item {
+      display: flex;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .rules-item::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--text-dim);
+    }
+    .empty-state .ei {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
+      opacity: 0.5;
+    }
+    .empty-state .et {
+      font-size: 0.82rem;
+    }
+
+    /* ─── SKELETON ─── */
+    .sk-card {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      overflow: hidden;
+      position: relative;
+    }
+    .sk-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 20%, rgba(0, 212, 255, 0.02) 50%, transparent 80%);
+      background-size: 200% 100%;
+      animation: skShimmer 1.4s ease infinite;
+    }
+    @keyframes skShimmer {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+    .sk-line {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--surface-light);
+      margin-bottom: 6px;
+    }
+    .sk-line.s {
+      width: 50%;
+    }
+    .sk-line.m {
+      width: 75%;
+    }
+    .sk-line.l {
+      width: 100%;
+    }
+    .sk-score {
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-light);
+      margin: 8px 0;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    .footer-note {
+      text-align: center;
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      padding: 16px 0 4px;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 480px) {
+      .topbar-title {
+        font-size: 0.9rem;
+      }
+      .topbar-name {
+        max-width: 50px;
+        font-size: 0.65rem;
+      }
+      .stat-card {
+        padding: 10px 6px;
+      }
+      .stat-value {
+        font-size: 1rem;
+      }
+      .mcard {
+        padding: 10px;
+      }
+      .mc-team .fi {
+        font-size: 1.6rem;
+      }
+      .mc-team .tname {
+        font-size: 0.7rem;
+      }
+      .score-digit {
+        width: 36px;
+        height: 42px;
+      }
+      .score-digit input {
+        font-size: 1rem;
+      }
+      .score-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+      }
+      .save-tick {
+        width: 32px;
+        height: 32px;
+        font-size: 0.7rem;
+      }
+    }
+
+    /* ─── BOTTOM NAV ─── */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 500;
+      padding: 4px 8px calc(4px + env(safe-area-inset-bottom));
+      background: rgba(6, 20, 31, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--card-border);
+      display: none;
+    }
+    @media (max-width: 640px) {
+      .bottom-nav {
+        display: block;
+      }
+    }
+    .bn-inner {
+      display: flex;
+      gap: 2px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .bn-btn {
+      flex: 1;
+      min-height: 44px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      transition: color var(--t);
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .bn-btn .bi {
+      font-size: 1rem;
+      transition: transform var(--t);
+    }
+    .bn-btn.active {
+      color: var(--cyan);
+    }
+    .bn-btn.active .bi {
+      transform: translateY(-2px) scale(1.08);
+    }
+    .bn-btn:active {
+      transform: scale(0.9);
+    }
+    .bn-badge {
+      position: absolute;
+      top: 2px;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      font-size: 0.4rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg);
+    }
+    .bn-badge.hidden {
+      display: none;
+    }
+    .bn-btn-wrap {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ PAGE LOADER ═══ -->
+  <div id="pageLoader">
+    <div class="loader-ring"></div>
+    <div class="loader-brand">WC 2026</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <div class="loader-status" id="loaderStatus">Connecting…</div>
+  </div>
+
+  <!-- ═══ TOAST WRAP ═══ -->
+  <div id="toastWrap"></div>
+
+  <!-- ═══ LOGIN SCREEN ═══ -->
+  <div id="loginScreen">
+    <div class="login-orb a"></div>
+    <div class="login-orb b"></div>
+    <div class="login-card">
+      <div class="login-card-top">
+        <div class="login-icon">⚽</div>
+        <div class="login-title"><span>WC 2026</span></div>
+        <div class="login-sub">Elite Office Prediction Pool</div>
+        <div class="login-players" id="loginPlayerCount">👥 <span id="playerCountTxt">Loading…</span></div>
+      </div>
+      <div class="login-card-body">
+        <div id="loginMsg"></div>
+        <div class="lf">
+          <label class="lf-label" for="playerSelect">Select Player</label>
+          <div class="lf-wrap">
+            <span class="lf-icon">👤</span>
+            <select id="playerSelect"><option value="">Loading…</option></select>
+          </div>
+        </div>
+        <div class="lf">
+          <label class="lf-label" for="pinInput">4-Digit PIN</label>
+          <div class="lf-wrap" style="justify-content:center;">
+            <input id="pinInput" type="password" maxlength="4" inputmode="numeric" placeholder="••••" autocomplete="off">
+          </div>
+          <div class="pin-dots" id="pinDots">
+            <div class="pin-dot" id="pd0"></div>
+            <div class="pin-dot" id="pd1"></div>
+            <div class="pin-dot" id="pd2"></div>
+            <div class="pin-dot" id="pd3"></div>
+          </div>
+        </div>
+        <button class="btn-primary" id="loginBtn" onclick="doLogin()">Enter Pool →</button>
+      </div>
+      <div class="login-footer">
+        <span class="login-secure">🔒 Secure · Private</span>
+        <span class="login-badge">🇳🇵 Office Pool</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DASHBOARD ═══ -->
+  <div id="dashScreen">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-brand">
+        <div class="topbar-logo">⚽</div>
+        <span class="topbar-title">WC 2026</span>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-user">
+          <div class="topbar-avatar" id="tbAv">U</div>
+          <span class="topbar-name" id="tbName">User</span>
+        </div>
+        <button class="topbar-btn" onclick="toggleNotif()" aria-label="Notifications">
+          🔔
+          <span class="badge-dot hidden" id="notifBadge">0</span>
+        </button>
+        <button class="topbar-btn" onclick="toggleChat()" aria-label="Chat">
+          💬
+        </button>
+        <button class="topbar-btn" id="refreshBtn" onclick="manualRefresh()" aria-label="Refresh">
+          🔄
+        </button>
+        <button class="topbar-btn" onclick="doLogout()" aria-label="Logout">
+          🚪
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats Strip -->
+    <div class="stats-strip">
+      <div class="stat-card"><span class="stat-icon">⭐</span><div class="stat-value" id="sPoints">0</div><div class="stat-label">Points</div></div>
+      <div class="stat-card"><span class="stat-icon">📊</span><div class="stat-value"><span id="sPlayed">0</span><span class="stat-of">/<span id="sTotal">0</span></span></div><div class="stat-label">Played</div></div>
+      <div class="stat-card"><span class="stat-icon">📈</span><div class="stat-value"><span id="sRank">?</span><span class="stat-of">/<span id="sTotalP">?</span></span></div><div class="stat-label">Rank</div></div>
+      <div class="stat-card"><span class="stat-icon">🎯</span><div class="stat-value" id="sExact">0</div><div class="stat-label">Exact</div></div>
+    </div>
+
+    <!-- Nav Tabs -->
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-tab="fixtures">📅 Fixtures</button>
+      <button class="nav-tab" data-tab="standings">🏆 Standings</button>
+      <button class="nav-tab" data-tab="mypicks">📋 My Picks</button>
+      <button class="nav-tab" data-tab="league">📊 League</button>
+      <button class="nav-tab" data-tab="bracket">🗂️ Bracket</button>
+      <button class="nav-tab" data-tab="money">💰 Prize</button>
+      <button class="nav-tab" data-tab="rules">📜 Rules</button>
+    </nav>
+
+    <!-- ═══ TAB PANELS ═══ -->
+    <!-- FIXTURES -->
+    <div class="tab-panel active" id="tabFixtures">
+      <div class="chip-row" id="roundChips"></div>
+      <div class="date-row">
+        <button class="date-nav" onclick="scrollDates(-1)">‹</button>
+        <div class="chip-row" id="dateChips" style="padding-bottom:0;flex:1;"></div>
+        <button class="date-nav" onclick="scrollDates(1)">›</button>
+      </div>
+      <div id="matchesContainer" style="margin-top:12px;"></div>
+
+      <div class="champion-card">
+        <div class="champion-title">🏆 Champion Prediction <span style="font-weight:400;color:var(--text-dim);font-size:0.6rem;">+10 pts</span></div>
+        <div class="champion-note">⚠️ Lock before Round of 16 ends</div>
+        <div class="champion-row">
+          <select class="champion-select" id="champSelect"><option value="">Loading…</option></select>
+          <button class="btn-cyan" style="padding:0 16px;min-height:40px;flex:0 0 auto;border-radius:var(--radius-sm);" onclick="saveChampion()">Save</button>
+        </div>
+        <div class="champion-status" id="champStatus"></div>
+      </div>
+    </div>
+
+    <!-- STANDINGS -->
+    <div class="tab-panel" id="tabStandings">
+      <div class="section-header">
+        <div class="section-title">Leaderboard</div>
+        <span class="section-sub" id="lbUpdated">Updated just now</span>
+      </div>
+      <div class="lb-container" id="lbContainer"></div>
+    </div>
+
+    <!-- MY PICKS -->
+    <div class="tab-panel" id="tabMypicks">
+      <div class="mini-stats">
+        <div class="mini-tile"><span class="mi">📋</span><div class="mv" id="mpTotal">0</div><div class="ml">Picks</div></div>
+        <div class="mini-tile"><span class="mi">⭐</span><div class="mv" id="mpPts">0</div><div class="ml">Points</div></div>
+        <div class="mini-tile"><span class="mi">🎯</span><div class="mv" id="mpEx">0</div><div class="ml">Exact</div></div>
+        <div class="mini-tile"><span class="mi">✅</span><div class="mv" id="mpCr">0</div><div class="ml">Correct</div></div>
+      </div>
+      <div id="myPicksContent"></div>
+    </div>
+
+    <!-- LEAGUE -->
+    <div class="tab-panel" id="tabLeague">
+      <div id="leagueContent"></div>
+    </div>
+
+    <!-- BRACKET -->
+    <div class="tab-panel" id="tabBracket">
+      <div class="section-header">
+        <div class="section-title">Knockout Bracket</div>
+      </div>
+      <div id="bracketContent"></div>
+    </div>
+
+    <!-- MONEY -->
+    <div class="tab-panel" id="tabMoney">
+      <div id="moneyContent"></div>
+    </div>
+
+    <!-- RULES -->
+    <div class="tab-panel" id="tabRules">
+      <div class="glass" style="padding:20px;">
+        <h3 style="font-weight:900;font-size:1.1rem;color:var(--gold);margin-bottom:12px;">📜 Rules & Regulations</h3>
+        <div class="rules-section">
+          <h4>🎯 Scoring System</h4>
+          <div class="rules-pts">
+            <div class="rules-pt-box"><div class="pv">5</div><div class="pl">Exact Score</div></div>
+            <div class="rules-pt-box"><div class="pv">1</div><div class="pl">Correct Result</div></div>
+            <div class="rules-pt-box"><div class="pv">10</div><div class="pl">Champion Pick</div></div>
+          </div>
+        </div>
+        <div class="rules-section">
+          <h4>⏰ Deadlines</h4>
+          <div class="rules-list">
+            <div class="rules-item">Predictions lock <strong>10 minutes</strong> before kickoff.</div>
+            <div class="rules-item">Champion pick locks before Round of 16 ends.</div>
+          </div>
+        </div>
+        <div class="rules-section">
+          <h4>🏆 Prize Pool</h4>
+          <div class="rules-list">
+            <div class="rules-item"><strong>1st:</strong> 50% of pool</div>
+            <div class="rules-item"><strong>2nd:</strong> 30% of pool</div>
+            <div class="rules-item"><strong>3rd:</strong> 20% of pool</div>
+          </div>
+        </div>
+        <div class="rules-section">
+          <h4>📋 General</h4>
+          <div class="rules-list">
+            <div class="rules-item">Entry fee: <strong>NPR 500</strong></div>
+            <div class="rules-item">Ties broken by exact scores</div>
+            <div class="rules-item">Admin decisions are final</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note" id="footerUpdated">Last updated: just now</div>
+  </div>
+
+  <!-- ═══ NOTIFICATION PANEL ═══ -->
+  <div class="notif-panel hidden" id="notifPanel">
+    <div class="notif-header">
+      <span class="notif-title">🔔 Notifications</span>
+      <button class="notif-clear" onclick="clearNotifs()">Clear All</button>
+    </div>
+    <div class="notif-list" id="notifList"></div>
+  </div>
+
+  <!-- ═══ CHAT PANEL ═══ -->
+  <div class="chat-panel hidden" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-dot"></div>
+        <span class="chat-title">Pool Chat</span>
+        <span class="chat-count" id="chatCount">0 online</span>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div style="text-align:center;color:var(--text-dim);font-size:0.7rem;padding:8px;">💬 Chat with your office pool!</div>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Type a message..." maxlength="200" onkeypress="chatKeypress(event)">
+      <button class="chat-send" onclick="sendChat()">➤</button>
+    </div>
+  </div>
+
+  <!-- ═══ PREDICTION POPUP ═══ -->
+  <div class="pred-popup hidden" id="predPopup">
+    <div class="pred-popup-card">
+      <span class="pred-popup-icon">⚡</span>
+      <div class="pred-popup-title">Unpredicted Matches!</div>
+      <div class="pred-popup-text">You have upcoming matches without predictions. Don't miss out on points!</div>
+      <div class="pred-popup-matches" id="popupMatchList"></div>
+      <div class="pred-popup-actions">
+        <button class="btn-cyan" onclick="closePredPopup(true)">Predict Now</button>
+        <button class="btn-ghost" onclick="closePredPopup(false)">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BOTTOM NAV ═══ -->
+  <nav class="bottom-nav" id="bottomNav">
+    <div class="bn-inner">
+      <button class="bn-btn active" data-tab="fixtures"><span class="bi">📅</span>Fixtures</button>
+      <button class="bn-btn" data-tab="standings"><span class="bi">🏆</span>Standings</button>
+      <button class="bn-btn" data-tab="mypicks"><span class="bi">📋</span>Picks</button>
+      <button class="bn-btn" data-tab="league"><span class="bi">📊</span>League</button>
+      <button class="bn-btn" data-tab="money"><span class="bi">💰</span>Prize</button>
+      <button class="bn-btn" onclick="toggleChat()" style="position:relative;">
+        <span class="bi">💬</span>Chat
+        <span class="bn-badge hidden" id="chatBadge">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════════════
+    // APPLICATION — World Cup 2026 Prediction Pool
+    // ═══════════════════════════════════════════════════════════════════════
+
+    (function() {
+      'use strict';
+
+      /* ─── CONFIG ─── */
+      const APP_URL = 'https://script.google.com/macros/s/AKfycbzqdsFirPPsW7c6ZeUvXXs989QOhVXNw4OxQU4iUsZOg_eQ9isvISTbzdw_GCIleVH9/exec';
+      const PTS = { EXACT: 5, RESULT: 1, CHAMP: 10 };
+      const LOCK_MIN = 10;
+      const ENTRY_FEE = 500;
+
+      /* ─── STATE ─── */
+      let CU = null; // current user
+      let allMatches = [];
+      let formData = {};
+      let selDate = null;
+      let selRound = 'all';
+      let notifs = [];
+      let unreadNotifs = 0;
+      let chatMessages = [];
+      let tempPreds = {};
+      let isLoading = false;
+
+      /* ─── STORAGE ─── */
+      const LS = {
+        get: (k, d = null) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+        set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+        del: (k) => { try { localStorage.removeItem(k); } catch (e) {} }
+      };
+      const SC = {
+        get: (k, d = null) => { try { const v = sessionStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+        set: (k, v, ttl = 300000) => { try { sessionStorage.setItem(k, JSON.stringify({ v, t: Date.now() + ttl })); } catch (e) {} },
+        getV: (k, d = null) => { const x = SC.get(k); if (!x) return d; if (Date.now() > x.t) { sessionStorage.removeItem(k); return d; } return x.v; }
+      };
+
+      /* ─── API ─── */
+      const pending = {};
+      function callAPI(action, data, cb) {
+        if (pending[action]) { pending[action].abort(); }
+        const ctrl = new AbortController();
+        pending[action] = ctrl;
+        const p = { ...(data || {}) };
+        if (CU) { p.playerId = CU.id;
+          p.userId = CU.id; }
+        const url = APP_URL + '?action=' + encodeURIComponent(action) + '&data=' + encodeURIComponent(JSON.stringify(p)) + '&_=' + Date.now();
+        const to = setTimeout(() => ctrl.abort(), 15000);
+        fetch(url, { method: 'GET', headers: { Accept: 'application/json' }, signal: ctrl.signal })
+          .then(r => r.ok ? r.json() : Promise.reject('HTTP ' + r.status))
+          .then(res => { clearTimeout(to);
+            delete pending[action];
+            cb && cb(null, res); })
+          .catch(err => { clearTimeout(to);
+            delete pending[action]; if (err.name === 'AbortError') return;
+            cb && cb({ message: String(err) }, null); });
+      }
+
+      /* ─── TIME HELPERS ─── */
+      function parseMatchTime(m) {
+        if (m.matchDateTime) { const d = new Date(m.matchDateTime); if (!isNaN(d)) return d; }
+        if (!m.date) return null;
+        let y, mo, dy, h = 0,
+          mi = 0;
+        if (typeof m.date === 'string' && m.date.includes('-')) { const p = m.date.split('-');
+          y = +p[0];
+          mo = +p[1] - 1;
+          dy = +p[2]; } else if (typeof m.date === 'string' && m.date.includes('/')) { const p = m.date.split('/');
+          mo = +p[0] - 1;
+          dy = +p[1];
+          y = +p[2]; } else { const d = new Date(m.date); if (!isNaN(d)) return d; return null; }
+        if (m.time && typeof m.time === 'string' && m.time.includes(':')) { const p = m.time.split(':');
+          h = +p[0] || 0;
+          mi = +p[1] || 0; }
+        const r = new Date(y, mo, dy, h, mi);
+        return isNaN(r) ? null : r;
+      }
+
+      function hasResult(m) {
+        return !!(m.result && m.result.home !== null && m.result.home !== undefined && m.result.home !== '' && !isNaN(parseInt(m.result
+            .home)) && m.result.away !== null && m.result.away !== undefined && m.result.away !== '' && !isNaN(parseInt(m.result
+            .away)));
+      }
+
+      function matchEnded(m) { return hasResult(m) || m.ended === true || ['Ended', 'Finished', 'Completed'].includes(m.status); }
+
+      function matchLocked(m) {
+        if (matchEnded(m)) return true;
+        if (m.status === 'Locked' || m.locked === true) return true;
+        const t = parseMatchTime(m);
+        if (!t) return false;
+        return (t - new Date()) / 60000 <= LOCK_MIN;
+      }
+
+      function getTimeLeft(m) {
+        const t = parseMatchTime(m);
+        if (!t) return '';
+        const diff = t - new Date();
+        if (diff < 0) { const mp = Math.floor(Math.abs(diff) / 60000); if (mp > 120) return ''; if (mp > 60) return Math.floor(mp /
+            60) + 'h ago'; if (mp > 0) return mp + 'm ago'; return ''; }
+        const mins = Math.floor(diff / 60000),
+          hrs = Math.floor(mins / 60),
+          days = Math.floor(hrs / 24);
+        if (days > 0) return days + 'd ' + (hrs % 24) + 'h';
+        if (hrs > 0) return hrs + 'h ' + (mins % 60) + 'm';
+        if (mins > 0) return mins + 'm';
+        return 'Soon';
+      }
+
+      function lockReason(m) {
+        const t = parseMatchTime(m);
+        if (!t) return '🔒 Locked';
+        const d = (t - new Date()) / 60000;
+        if (d > 0 && d <= LOCK_MIN) { const mn = Math.floor(d),
+            sec = Math.floor((d - mn) * 60); return '🔒 ' + mn + 'm ' + sec + 's to kickoff'; }
+        if (d <= 0) { const mp = Math.floor(Math.abs(d)); if (mp > 120) return '🏁 Match ended'; if (mp > 60) return '🏁 Ended ' +
+            Math.floor(mp / 60) + 'h ago'; if (mp > 0) return '🏁 Ended ' + mp + 'm ago'; return '🏁 In progress'; }
+        return '🔒 Locked';
+      }
+
+      function todayStr() { return new Date().toISOString().split('T')[0]; }
+
+      function nearestDate(matches) {
+        const today = todayStr(),
+          dates = [...new Set(matches.map(m => m.date))].sort();
+        return dates.find(d => d >= today) || dates[dates.length - 1] || null;
+      }
+
+      /* ─── FLAGS / FORM ─── */
+      const FLAGS = {
+        'Mexico': 'mx',
+        'South Africa': 'za',
+        'South Korea': 'kr',
+        'Czechia': 'cz',
+        'Canada': 'ca',
+        'Bosnia and Herzegovina': 'ba',
+        'Switzerland': 'ch',
+        'Qatar': 'qa',
+        'Brazil': 'br',
+        'Morocco': 'ma',
+        'Scotland': 'gb-sct',
+        'Haiti': 'ht',
+        'USA': 'us',
+        'Paraguay': 'py',
+        'Australia': 'au',
+        'Türkiye': 'tr',
+        'Germany': 'de',
+        'Ecuador': 'ec',
+        'Ivory Coast': 'ci',
+        'Curaçao': 'cw',
+        'Netherlands': 'nl',
+        'Japan': 'jp',
+        'Tunisia': 'tn',
+        'Sweden': 'se',
+        'Belgium': 'be',
+        'Iran': 'ir',
+        'Egypt': 'eg',
+        'New Zealand': 'nz',
+        'Spain': 'es',
+        'Cabo Verde': 'cv',
+        'Saudi Arabia': 'sa',
+        'Uruguay': 'uy',
+        'France': 'fr',
+        'Senegal': 'sn',
+        'Iraq': 'iq',
+        'Norway': 'no',
+        'Argentina': 'ar',
+        'Algeria': 'dz',
+        'Austria': 'at',
+        'Jordan': 'jo',
+        'Portugal': 'pt',
+        'Colombia': 'co',
+        'Uzbekistan': 'uz',
+        'DR Congo': 'cd',
+        'England': 'gb-eng',
+        'Croatia': 'hr',
+        'Panama': 'pa',
+        'Ghana': 'gh'
+      };
+
+      function flagSpan(team) { const c = FLAGS[team || '']; return c ? '<span class="fi fi-' + c + '"></span>' : ''; }
+
+      function getTeamForm(team) { return (team && formData[team]) || ['?', '?', '?']; }
+
+      function buildFormData(matches) {
+        const t = {};
+        matches.forEach(m => { if (m.home && !t[m.home]) t[m.home] = [];
+          if (m.away && !t[m.away]) t[m.away] = []; });
+        [...matches].filter(hasResult).sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(m => {
+          const hs = parseInt(m.result.home),
+            as = parseInt(m.result.away);
+          if (hs > as) { t[m.home]?.push('W');
+            t[m.away]?.push('L'); } else if (hs < as) { t[m.home]?.push('L');
+            t[m.away]?.push('W'); } else { t[m.home]?.push('D');
+            t[m.away]?.push('D'); }
+        });
+        Object.keys(t).forEach(k => { t[k] = t[k].slice(-3); while (t[k].length < 3) t[k].unshift('?'); });
+        formData = t;
+      }
+
+      /* ─── NEPALI DATE ─── */
+      function getNepali(dateStr) {
+        try {
+          if (!dateStr) return '';
+          let y, mo, dy;
+          if (typeof dateStr === 'string' && dateStr.includes('T')) { const d = new Date(dateStr); if (isNaN(d)) return '';
+            y = d.getFullYear();
+            mo = d.getMonth() + 1;
+            dy = d.getDate(); } else if (typeof dateStr === 'string' && dateStr.includes('-')) { const p = dateStr.split('-'); if (p
+              .length < 3) return '';
+            y = +p[0];
+            mo = +p[1];
+            dy = +p[2]; } else return '';
+          if (isNaN(y) || isNaN(mo) || isNaN(dy)) return '';
+          const months = ['बैशाख', 'जेठ', 'असार', 'श्रावण', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फाल्गुन', 'चैत्र'];
+          let bsMo = mo - 3;
+          if (bsMo < 1) bsMo += 12;
+          if (bsMo > 12) bsMo -= 12;
+          const bsY = y + 56 + (mo < 4 ? 1 : 0);
+          return bsY + ' ' + (months[bsMo - 1] || '') + ' ' + String(dy).padStart(2, '0');
+        } catch (e) { return ''; }
+      }
+
+      function fmtDate(ds, ts) {
+        try {
+          if (!ds) return '';
+          let y, mo, dy;
+          if (typeof ds === 'string' && ds.includes('-')) { const p = ds.split('-');
+            y = +p[0];
+            mo = +p[1] - 1;
+            dy = +p[2]; } else if (typeof ds === 'string' && ds.includes('/')) { const p = ds.split('/');
+            mo = +p[0] - 1;
+            dy = +p[1];
+            y = +p[2]; } else { const d = new Date(ds); if (!isNaN(d)) { y = d.getFullYear();
+              mo = d.getMonth();
+              dy = d.getDate(); } }
+          if (!y) return ds || '';
+          const d = new Date(y, mo, dy);
+          const dp = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          let tp = '';
+          if (ts && typeof ts === 'string' && ts.includes(':')) { const [h, mi] = ts.split(':');
+            tp = h.padStart(2, '0') + ':' + mi.padStart(2, '0'); }
+          return dp + (tp ? ' · ' + tp : '');
+        } catch (e) { return ds || ''; }
+      }
+
+      function fmtDisp(ds) {
+        try { const d = new Date(ds); if (isNaN(d)) return ds; return d.toLocaleDateString('en-US', { weekday: 'short',
+            month: 'short', day: 'numeric' }); } catch (e) { return ds; }
+      }
+
+      /* ─── DOM HELPERS ─── */
+      function txt(id, v, fb) { const e = document.getElementById(id); if (e) e.textContent = v !== null && v !== undefined ? v : (
+          fb || ''); }
+
+      function html(id, h) { const e = document.getElementById(id); if (e) e.innerHTML = h; }
+
+      function el(id) { return document.getElementById(id); }
+
+      /* ─── TOAST ─── */
+      function toast(msg, type, dur) {
+        const w = el('toastWrap');
+        const t = document.createElement('div');
+        t.className = 'toast ' + (type || 'info');
+        const icons = { error: '⚠️', success: '✅', info: 'ℹ️', points: '⭐' };
+        t.innerHTML = '<span class="ti">' + (icons[type] || 'ℹ️') + '</span><span class="tt">' + msg +
+          '</span><button class="tc" onclick="this.parentElement.remove()">✕</button>';
+        w.appendChild(t);
+        setTimeout(() => { t.classList.add('out');
+          setTimeout(() => t.remove(), 250); }, dur || 3000);
+      }
+
+      /* ─── NOTIFICATIONS ─── */
+      function addNotif(title, body, type) {
+        const n = { id: Date.now(), title, body, type: type || 'system', time: new Date(), read: false };
+        notifs.unshift(n);
+        if (notifs.length > 50) notifs.pop();
+        unreadNotifs++;
+        updateNotifBadge();
+        renderNotifs();
+        LS.set('notifs', notifs.slice(0, 20));
+        if (type === 'points') toast(body, 'points');
+      }
+
+      function updateNotifBadge() {
+        const b = el('notifBadge');
+        if (b) { if (unreadNotifs > 0) { b.textContent = unreadNotifs > 9 ? '9+' : unreadNotifs;
+            b.classList.remove('hidden'); } else { b.classList.add('hidden'); } }
+      }
+
+      function toggleNotif() {
+        const p = el('notifPanel');
+        p.classList.toggle('hidden');
+        if (!p.classList.contains('hidden')) { unreadNotifs = 0;
+          updateNotifBadge();
+          notifs.forEach(n => n.read = true);
+          LS.set('notifs', notifs.slice(0, 20)); }
+        el('chatPanel').classList.add('hidden');
+      }
+
+      function clearNotifs() { notifs = [];
+        unreadNotifs = 0;
+        updateNotifBadge();
+        renderNotifs();
+        LS.del('notifs'); }
+
+      function renderNotifs() {
+        const list = el('notifList');
+        if (!list) return;
+        if (!notifs.length) { list.innerHTML = '<div class="notif-empty">📭 No notifications yet</div>'; return; }
+        list.innerHTML = notifs.map(n =>
+          '<div class="notif-item ' + (n.read ? '' : 'unread') + '" onclick="markNotifRead(' + n.id + ')">' +
+          '<div class="ni-icon ' + n.type + '">' + (n.type === 'points' ? '⭐' : n.type === 'reminder' ? '⏰' : '📢') +
+          '</div>' +
+          '<div class="ni-info"><div class="ni-title">' + n.title + '</div><div class="ni-body">' + n.body +
+          '</div><div class="ni-time">' + fmtRelTime(n.time) + '</div></div></div>'
+        ).join('');
+      }
+
+      function markNotifRead(id) { const n = notifs.find(x => x.id == id); if (n) n.read = true;
+        renderNotifs(); }
+
+      function fmtRelTime(t) {
+        const diff = Date.now() - new Date(t).getTime();
+        if (diff < 60000) return 'Just now';
+        if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
+        if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
+        return Math.floor(diff / 86400000) + 'd ago';
+      }
+
+      /* ─── CHAT ─── */
+      function initChat() {
+        chatMessages = LS.get('chatMessages', []);
+        renderChat();
+        setInterval(syncChat, 6000);
+      }
+
+      function syncChat() {
+        const saved = LS.get('chatMessages', []);
+        chatMessages = [...saved];
+        renderChat();
+      }
+
+      function toggleChat() {
+        const p = el('chatPanel');
+        p.classList.toggle('hidden');
+        if (!p.classList.contains('hidden')) { el('notifPanel').classList.add('hidden');
+          renderChat();
+          setTimeout(() => { const m = el('chatMessages'); if (m) m.scrollTop = m.scrollHeight; }, 50); }
+      }
+
+      function sendChat() {
+        const inp = el('chatInput');
+        const txt2 = inp.value.trim();
+        if (!txt2 || !CU) return;
+        const msg = { id: Date.now(), userId: CU.id, userName: CU.name, text: txt2, time: new Date().toISOString() };
+        chatMessages.push(msg);
+        LS.set('chatMessages', chatMessages.slice(-100));
+        renderChat();
+        inp.value = '';
+        setTimeout(() => { const m = el('chatMessages'); if (m) m.scrollTop = m.scrollHeight; }, 50);
+      }
+
+      function chatKeypress(e) { if (e.key === 'Enter') sendChat(); }
+
+      function renderChat() {
+        const w = el('chatMessages');
+        if (!w) return;
+        const msgs = chatMessages.slice(-30);
+        if (!msgs.length) { w.innerHTML =
+            '<div style="text-align:center;color:var(--text-dim);font-size:0.7rem;padding:8px;">💬 Chat with your office pool!</div>';
+          return; }
+        const near = w.scrollTop + w.clientHeight > w.scrollHeight - 60;
+        w.innerHTML = msgs.map(m => {
+          const own = CU && m.userId === CU.id;
+          const t2 = new Date(m.time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+          const init2 = (m.userName || 'U')[0].toUpperCase();
+          return '<div class="chat-msg ' + (own ? 'own' : '') + '">' +
+            '<div class="chat-msg-av">' + init2 + '</div>' +
+            '<div>' +
+            (!own ? '<div class="msg-name">' + m.userName + '</div>' : '') +
+            '<div class="chat-bubble">' + escHtml(m.text) + '</div>' +
+            '<div class="msg-time">' + t2 + '</div>' +
+            '</div></div>';
+        }).join('');
+        if (near) w.scrollTop = w.scrollHeight;
+        const count = new Set(msgs.map(m => m.userId)).size;
+        el('chatCount').textContent = count + ' online';
+        el('chatBadge').textContent = chatMessages.length > 0 ? chatMessages.length : '0';
+      }
+
+      function escHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g,
+          '&quot;'); }
+
+      /* ─── PRED % ─── */
+      function getPredPct(m) {
+        const key = 'pct_' + m.id;
+        const cached = SC.getV(key);
+        if (cached) return cached;
+        const seed = parseInt(m.id) || 1;
+        const homeBase = 30 + ((seed * 17) % 40);
+        const awayBase = 15 + ((seed * 13) % 35);
+        const totalPicks = (seed * 7) % 80 + 5;
+        return { home: homeBase, away: awayBase, draw: Math.max(0, 100 - homeBase - awayBase), total: totalPicks };
+      }
+
+      /* ─── SKELETON ─── */
+      function skels(n) {
+        return '<div class="match-grid">' + Array(n).fill(0).map(() =>
+          '<div class="sk-card"><div class="sk-line s"></div><div class="sk-score"></div><div class="sk-line m"></div><div class="sk-line l"></div></div>'
+          ).join('') + '</div>';
+      }
+
+      /* ═══ RENDER MATCH CARD ═══ */
+      function renderCard(m, delay) {
+        const locked = matchLocked(m),
+          ended = matchEnded(m),
+          result = hasResult(m);
+        let hasPred = false,
+          predH = '',
+          predA = '',
+          pred = null;
+        const tmp = tempPreds[m.id];
+        const saved = m.prediction;
+        if (tmp && (tmp.home !== null && tmp.home !== undefined)) { hasPred = true;
+          predH = tmp.home;
+          predA = tmp.away ?? '';
+          pred = { home: tmp.home, away: tmp.away }; } else if (saved && saved.home !== null && saved.home !== undefined && saved
+          .home !== '') { hasPred = true;
+          predH = saved.home;
+          predA = saved.away ?? '';
+          pred = saved; }
+        let isExact = false,
+          isCorrect = false;
+        if (result && hasPred && pred) {
+          const ph = parseInt(pred.home),
+            pa = parseInt(pred.away),
+            ah = parseInt(m.result.home),
+            aa = parseInt(m.result.away);
+          if (!isNaN(ph) && !isNaN(pa) && !isNaN(ah) && !isNaN(aa)) { isExact = ph === ah && pa === aa;
+            isCorrect = !isExact && ((ph > pa && ah > aa) || (ph < pa && ah < aa) || (ph === pa && ah === aa)); }
+        }
+        let sc = '';
+        if (ended && hasPred && result) { sc = isExact ? 'sc' : isCorrect ? 'sr' : 'sw'; } else if (locked && !ended) { sc =
+            'sl'; }
+
+        const tl = getTimeLeft(m);
+        let badge = '';
+        if (ended) { badge = '<span class="mc-badge ended">Ended</span>'; } else if (locked) { badge =
+            '<span class="mc-badge locked">' + (tl ? '⏳ ' + tl : 'Locked') + '</span>'; } else { badge =
+            '<span class="mc-badge open">' + (tl ? '⏳ ' + tl : 'Open') + '</span>'; }
+
+        const np = getNepali(m.date),
+          fd = fmtDate(m.date, m.time);
+        const hf = flagSpan(m.home),
+          af = flagSpan(m.away);
+        const pct = getPredPct(m);
+
+        let scoreCenter = '';
+        if (ended && result) { scoreCenter = '<div class="mc-score">' + m.result.home + '–' + m.result.away + '</div>'; } else if (
+          ended) { scoreCenter = '<div class="mc-vs">Pending</div>'; } else { scoreCenter = '<div class="mc-vs">vs</div>'; }
+
+        let predBanner = '';
+        if (ended) {
+          if (hasPred && pred) {
+            let bc, icon, lbl, pts;
+            if (result) {
+              if (isExact) { bc = 'exact';
+                icon = '🎯';
+                lbl = 'Exact Score!';
+                pts = '+' + PTS.EXACT + ' pts'; } else if (isCorrect) { bc = 'result';
+                icon = '✅';
+                lbl = 'Correct Result';
+                pts = '+' + PTS.RESULT + ' pt'; } else { bc = 'wrong';
+                icon = '❌';
+                lbl = 'Wrong';
+                pts = '0 pts'; }
+            } else { bc = 'pending';
+              icon = '⏳';
+              lbl = 'Pending';
+              pts = '...'; }
+            predBanner = '<div class="pred-banner ' + bc + '"><span class="pb-icon">' + icon +
+              '</span><div class="pb-info"><div class="pb-label">' + lbl +
+              '</div><div class="pb-sub">You: ' + predH + '–' + predA + (result ? ' · Actual: ' + m.result.home + '–' + m
+                .result.away : '') + '</div></div><span class="pb-pts">' + pts + '</span></div>';
+          } else { predBanner =
+              '<div class="pred-banner none"><span class="pb-icon">📭</span><div class="pb-info"><div class="pb-label">No Pick</div><div class="pb-sub">Not predicted</div></div><span class="pb-pts">—</span></div>'; }
+        }
+
+        const predBarsHtml = !ended ?
+          '<div class="pred-bars"><div class="pred-bar-wrap"><div class="pred-bar-label"><span>' + (m.home || 'Home') +
+          '</span><span>' + pct.home + '%</span></div><div class="pred-bar-track"><div class="pred-bar-fill home" style="width:' +
+          pct.home + '%"></div></div></div><div class="pred-bar-center">' + pct.total +
+          '🗳️</div><div class="pred-bar-wrap"><div class="pred-bar-label"><span>' + pct.away + '%</span><span>' + (m.away ||
+            'Away') +
+          '</span></div><div class="pred-bar-track"><div class="pred-bar-fill away" style="width:' + pct.away +
+          '%"></div></div></div></div>' :
+          '';
+
+        const dis = (locked || !CU) ? 'disabled' : '';
+        let controls = '';
+        if (!ended && !locked) {
+          const sv = m.prediction && m.prediction.home !== null && m.prediction.home !== undefined;
+          const tv = tempPreds[m.id] && tempPreds[m.id].home !== null && tempPreds[m.id].home !== undefined;
+          const isChanged = tv && (tempPreds[m.id].home !== m.prediction?.home || tempPreds[m.id].away !== m.prediction?.away);
+          let tickCls = isChanged ? 'save-tick visible pending' : sv ? 'save-tick visible saved' : 'save-tick';
+          controls =
+            '<div class="score-picker"><div class="score-unit"><button class="score-btn" data-dir="down" data-mid="' + m.id +
+            '" data-side="home" ' + dis + '>−</button><div class="score-digit" id="sd_h_' + m.id +
+            '"><input type="number" id="hi_' + m.id + '" min="0" max="20" value="' + (predH !== '' ? predH : '') +
+            '" placeholder="0" inputmode="numeric" ' + dis + '></div><button class="score-btn" data-dir="up" data-mid="' +
+            m.id + '" data-side="home" ' + dis + '>+</button></div><span class="score-sep">—</span><button class="' +
+            tickCls + '" id="tick_' + m.id + '" onclick="savePrediction(\'' + m.id +
+            '\')" title="Save">✓</button><span class="score-sep">—</span><div class="score-unit"><button class="score-btn" data-dir="down" data-mid="' +
+            m.id + '" data-side="away" ' + dis + '>−</button><div class="score-digit" id="sd_a_' + m.id +
+            '"><input type="number" id="ai_' + m.id + '" min="0" max="20" value="' + (predA !== '' ? predA : '') +
+            '" placeholder="0" inputmode="numeric" ' + dis + '></div><button class="score-btn" data-dir="up" data-mid="' +
+            m.id + '" data-side="away" ' + dis + '>+</button></div></div>';
+        } else if (locked && !ended) { controls = '<div class="lock-note">' + lockReason(m) + '</div>'; } else { controls =
+            '<div class="ended-note">🏁 Match ended</div>'; }
+
+        const hForm = getTeamForm(m.home),
+          aForm = getTeamForm(m.away);
+        const fd2 = f => '<span class="fdot ' + (f === '?' ? 'Q' : f) + '">' + f + '</span>';
+        const formGuide = '<div class="form-guide"><span class="fg-lbl">Form</span><span>' + (m.home || '') +
+          ':</span>' + hForm.map(fd2).join('') + '<span style="margin-left:6px;">' + (m.away || '') +
+          ':</span>' + aForm.map(fd2).join('') + '</div>';
+
+        return '<div class="mcard ' + sc + '" data-mid="' + m.id + '" style="animation-delay:' + (delay || 0) + 's">' +
+          '<div class="mc-head"><span class="mc-stage">#' + (m.id || '') + '·' + (m.stage || '') + (m.round ? ' R' + m
+            .round : '') + ((m.group && m.group !== '-') ? '·<span class="grp">Grp ' + m.group + '</span>' : '') +
+          '</span>' + badge + '</div>' +
+          '<div class="mc-date"><span>📅 ' + fd + '</span>' + (np ? ' <span class="mc-nepali">🇳🇵 ' + np + '</span>' :
+            '') + '</div>' +
+          '<div class="mc-teams"><div class="mc-team">' + hf + '<div class="tname">' + (m.home || '?') +
+          '</div></div><div class="mc-vs">' + scoreCenter + '</div><div class="mc-team">' + af + '<div class="tname">' + (
+            m.away || '?') + '</div></div></div>' +
+          predBarsHtml + predBanner + controls + formGuide +
+          '</div>';
+      }
+
+      /* ═══ STEPPERS ═══ */
+      let stepTimers = {};
+
+      function bindSteppers(container) {
+        container.querySelectorAll('.score-btn').forEach(btn => {
+          btn.addEventListener('pointerdown', function(e) {
+            e.stopPropagation();
+            if (this.disabled) return;
+            doStep(this);
+            const key = this.dataset.mid + this.dataset.side;
+            stepTimers[key] = { speed: 400, start: Date.now() };
+            const iv = setInterval(() => {
+              const st = stepTimers[key];
+              if (!st) return;
+              const elapsed = Date.now() - st.start;
+              const speed = elapsed > 2000 ? 80 : elapsed > 1000 ? 150 : 400;
+              doStep(this);
+              if (elapsed > 500 && navigator.vibrate) navigator.vibrate(5);
+              st.speed = speed;
+            }, stepTimers[key].speed);
+            stepTimers[key].iv = iv;
+          });
+          btn.addEventListener('pointerup', function() { clearInterval(stepTimers[this.dataset.mid + this.dataset
+              .side]?.iv);
+            delete stepTimers[this.dataset.mid + this.dataset.side]; });
+          btn.addEventListener('pointerleave', function() { clearInterval(stepTimers[this.dataset.mid + this.dataset
+              .side]?.iv);
+            delete stepTimers[this.dataset.mid + this.dataset.side]; });
+        });
+      }
+
+      let scoreToastTimer = {};
+
+      function doStep(btn) {
+        const mid = btn.dataset.mid,
+          side = btn.dataset.side,
+          dir = btn.dataset.dir;
+        const inp = el((side === 'home' ? 'hi_' : 'ai_') + mid);
+        if (!inp || inp.disabled) return;
+        let v = parseInt(inp.value) || 0;
+        v = Math.max(0, Math.min(20, v + (dir === 'up' ? 1 : -1)));
+        const old = parseInt(inp.value) || 0;
+        if (v === old) return;
+        inp.value = v;
+        const box = el('sd_' + (side === 'home' ? 'h' : 'a') + '_' + mid);
+        if (box) { box.classList.remove('flip');
+          void box.offsetWidth;
+          box.classList.add('flip'); }
+        if (navigator.vibrate) navigator.vibrate(6);
+        if (!tempPreds[mid]) tempPreds[mid] = { home: null, away: null };
+        tempPreds[mid][side] = v;
+        const other = side === 'home' ? 'away' : 'home';
+        const otherInp = el((other === 'home' ? 'hi_' : 'ai_') + mid);
+        if (otherInp && (otherInp.value === '' || otherInp.value === '?')) { tempPreds[mid][other] = 0;
+          otherInp.value = 0; } else if (otherInp) { tempPreds[mid][other] = parseInt(otherInp.value) || 0; }
+        updateTick(mid);
+        clearTimeout(scoreToastTimer[mid]);
+        scoreToastTimer[mid] = setTimeout(() => {
+          const hv = tempPreds[mid]?.home ?? '?';
+          const av = tempPreds[mid]?.away ?? '?';
+          const m = allMatches.find(x => x.id === mid);
+          if (m) toast(m.home + ' ' + hv + ' – ' + av + ' ' + m.away, 'info', 1500);
+        }, 350);
+        clearTimeout(window['saveTimer_' + mid]);
+        window['saveTimer_' + mid] = setTimeout(() => savePrediction(mid), 1200);
+      }
+
+      function updateTick(mid) {
+        const tick = el('tick_' + mid);
+        if (!tick) return;
+        const m = allMatches.find(x => x.id === mid);
+        const tmp = tempPreds[mid];
+        const sv = m?.prediction;
+        const hasTemp = tmp && tmp.home !== null && tmp.home !== undefined && tmp.away !== null && tmp.away !== undefined;
+        const hasSaved = sv && sv.home !== null && sv.home !== undefined && sv.home !== '';
+        const isChanged = hasTemp && (tmp.home !== sv?.home || tmp.away !== sv?.away);
+        tick.className = 'save-tick visible ' + (isChanged ? 'pending' : hasSaved ? 'saved' : '');
+      }
+
+      /* ═══ SAVE PREDICTION ═══ */
+      function savePrediction(matchId) {
+        if (!CU) { toast('Please login first', 'error'); return; }
+        const m = allMatches.find(x => x.id === matchId);
+        if (!m) { toast('Match not found', 'error'); return; }
+        if (matchLocked(m)) { toast('Match is locked', 'error'); return; }
+        const hi = el('hi_' + matchId),
+          ai = el('ai_' + matchId);
+        if (!hi || !ai) { toast('Inputs not found', 'error'); return; }
+        const h = parseInt(hi.value),
+          a = parseInt(ai.value);
+        if (isNaN(h) || isNaN(a) || h < 0 || a < 0 || h > 20 || a > 20) { toast('Enter valid scores (0–20)',
+          'error'); return; }
+        if (h === m.prediction?.home && a === m.prediction?.away) { updateTick(matchId); return; }
+        const tick = el('tick_' + matchId);
+        if (tick) tick.className = 'save-tick visible saving';
+        callAPI('savePrediction', { matchId: String(matchId), home: h, away: a }, (err, res) => {
+          if (err || res?.status === 'error') {
+            const msg = res?.message || err?.message || 'Save failed';
+            toast(msg, 'error');
+            if (tick) tick.className = 'save-tick visible error';
+            return;
+          }
+          if (!m.prediction) m.prediction = {};
+          m.prediction.home = h;
+          m.prediction.away = a;
+          if (tempPreds[matchId]) { tempPreds[matchId].home = null;
+            tempPreds[matchId].away = null; }
+          if (tick) tick.className = 'save-tick visible saved';
+          toast('Saved! ' + h + '–' + a, 'success', 1500);
+          updateStats();
+        });
+      }
+
+      /* ═══ LOGIN ═══ */
+      function loadPlayers() {
+        const cached = SC.getV('players');
+        if (cached) { populatePlayers(cached); return; }
+        callAPI('getPlayers', null, (err, res) => {
+          if (err || !res?.players?.length) {
+            txt('playerCountTxt', 'Error loading');
+            el('playerSelect').innerHTML = '<option value="">Error</option>';
+            return;
+          }
+          SC.set('players', res.players, 600000);
+          populatePlayers(res.players);
+        });
+      }
+
+      function populatePlayers(players) {
+        const sel = el('playerSelect');
+        if (!sel) return;
+        sel.innerHTML = '<option value="">Select your name</option>';
+        players.forEach(p => { const o = document.createElement('option');
+          o.value = p.id;
+          o.textContent = p.name + (p.department ? ' (' + p.department + ')' : '');
+          sel.appendChild(o); });
+        txt('playerCountTxt', players.length + ' players');
+        loadChampTeams();
+        loadAllMatches();
+      }
+
+      function doLogin() {
+        const pid = el('playerSelect').value;
+        const pin = el('pinInput').value;
+        if (!pid) { html('loginMsg', '<div class="login-msg error">❌ Select your name</div>'); return; }
+        if (!pin || pin.length !== 4) { html('loginMsg', '<div class="login-msg error">❌ Enter 4-digit PIN</div>'); return; }
+        const btn = el('loginBtn');
+        if (btn) { btn.disabled = true;
+          btn.textContent = 'Logging in…'; }
+        html('loginMsg', '<div class="login-msg info">⏳ Verifying…</div>');
+        callAPI('login', { playerId: pid, pin: pin }, (err, res) => {
+          if (btn) { btn.disabled = false;
+            btn.textContent = 'Enter Pool →'; }
+          if (err || !res?.user) { html('loginMsg',
+              '<div class="login-msg error">❌ ' + (err?.message || res?.message || 'Login failed') + '</div>'); return; }
+          CU = res.user;
+          LS.set('savedUser', { id: CU.id, pin: pin });
+          showDashboard();
+        });
+      }
+
+      function doLogout() {
+        CU = null;
+        allMatches = [];
+        formData = {};
+        selDate = null;
+        selRound = 'all';
+        tempPreds = {};
+        LS.del('savedUser');
+        el('dashScreen').style.display = 'none';
+        el('loginScreen').style.display = 'flex';
+        el('pinInput').value = '';
+        html('loginMsg', '');
+        updatePinDots('');
+      }
+
+      function tryAutoLogin() {
+        const saved = LS.get('savedUser');
+        if (!saved || !saved.id || !saved.pin) return false;
+        callAPI('login', { playerId: saved.id, pin: saved.pin }, (err, res) => {
+          if (err || !res?.user) { LS.del('savedUser'); return; }
+          CU = res.user;
+          showDashboard();
+        });
+        return true;
+      }
+
+      /* ─── PIN DOTS ─── */
+      function updatePinDots(val) {
+        const pd = el('pinDots');
+        if (!pd) return;
+        pd.classList.toggle('show', val.length > 0);
+        for (let i = 0; i < 4; i++) { const d = el('pd' + i); if (d) d.classList.toggle('filled', i < val.length); }
+      }
+
+      /* ═══ DASHBOARD ═══ */
+      function showDashboard() {
+        el('loginScreen').style.display = 'none';
+        el('dashScreen').style.display = 'block';
+        el('bottomNav').style.display = 'block';
+        updateUserUI();
+        loadAllMatches();
+        loadChampStatus();
+        loadMoneyPool();
+        notifs = LS.get('notifs', []);
+        renderNotifs();
+        updateNotifBadge();
+        initChat();
+        addNotif('Welcome back! 👋', 'Check the fixtures and make your predictions!', 'system');
+      }
+
+      function updateUserUI() {
+        if (!CU) return;
+        const init = (CU.name || 'U')[0].toUpperCase();
+        ['tbAv'].forEach(id => txt(id, init));
+        txt('tbName', CU.name || 'User');
+        const pts = CU.points || 0,
+          ex = CU.exactScores || 0,
+          rk = CU.rank || '?';
+        txt('sPoints', pts);
+        txt('sExact', ex);
+        txt('sRank', rk);
+      }
+
+      function updateStats() {
+        const total = allMatches.length;
+        let played = 0;
+        allMatches.forEach(m => { if (matchEnded(m)) played++;
+          else { const t = parseMatchTime(m); if (t && t < new Date()) played++; } });
+        txt('sPlayed', played);
+        txt('sTotal', total);
+      }
+
+      function updateLastUpdated() {
+        const now = new Date();
+        txt('footerUpdated', 'Last updated: ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit',
+          second: '2-digit' }));
+        txt('lbUpdated', 'Updated ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+      }
+
+      /* ═══ LOAD MATCHES ═══ */
+      function loadAllMatches(showSkel) {
+        const c = el('matchesContainer');
+        if (c && showSkel !== false) c.innerHTML = skels(6);
+        const d = CU ? { playerId: CU.id } : {};
+        const cacheKey = 'matches_' + (CU?.id || 'anon');
+        if (showSkel === false) { const cached = SC.getV(cacheKey); if (cached) { processMatches(cached); return; } }
+        callAPI('getMatches', d, (err, res) => {
+          if (err) { if (c) c.innerHTML = '<div class="empty-state"><span class="ei">⚠️</span><div class="et">' + err
+              .message + '</div></div>'; return; }
+          if (!res?.matches) { if (c) c.innerHTML =
+              '<div class="empty-state"><span class="ei">📭</span><div class="et">No matches found</div></div>'; return; }
+          SC.set(cacheKey, res, 30000);
+          processMatches(res);
+        });
+      }
+
+      function processMatches(res) {
+        allMatches = res.matches;
+        buildFormData(allMatches);
+        updateStats();
+        renderRoundChips();
+        renderDateChips();
+        const filt = selRound === 'all' ? allMatches : allMatches.filter(m => m.stage === selRound);
+        if (!selDate || ![...new Set(filt.map(m => m.date))].includes(selDate)) selDate = nearestDate(filt);
+        renderMatches();
+        setTimeout(scrollToActiveDate, 100);
+        updateLastUpdated();
+        checkPredReminders();
+      }
+
+      /* ═══ PRED REMINDERS ═══ */
+      function checkPredReminders() {
+        if (!CU) return;
+        const today = todayStr();
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tomorrowStr = tomorrow.toISOString().split('T')[0];
+        const upcoming = allMatches.filter(m => {
+          if (matchLocked(m)) return false;
+          if (m.date !== today && m.date !== tomorrowStr) return false;
+          const hasPred = m.prediction && m.prediction.home !== null && m.prediction.home !== undefined;
+          return !hasPred;
+        });
+        if (!upcoming.length) return;
+        const key = 'predRem_' + today;
+        if (LS.get(key)) return;
+        LS.set(key, true);
+        const list = el('popupMatchList');
+        if (list) list.innerHTML = upcoming.slice(0, 4).map(m =>
+          '<div class="ppm-item">' + flagSpan(m.home) + '<span class="ppm-teams">' + (m.home || '?') + ' vs ' + (m
+            .away || '?') + '</span><span class="ppm-time">' + (getTimeLeft(m) || fmtDate(m.date, m.time)) +
+          '</span></div>'
+        ).join('');
+        el('predPopup').classList.remove('hidden');
+        addNotif('Predictions Needed! ⚡', 'You have ' + upcoming.length + ' upcoming match' + (upcoming.length > 1 ?
+          'es' : '') + ' without predictions', 'reminder');
+      }
+
+      function closePredPopup(goToPick) {
+        el('predPopup').classList.add('hidden');
+        if (goToPick) switchTab('fixtures');
+      }
+
+      /* ═══ ROUND CHIPS ═══ */
+      function renderRoundChips() {
+        const c = el('roundChips');
+        if (!c) return;
+        const rounds = {},
+          today = todayStr();
+        allMatches.forEach(m => { const r = m.stage || 'Unknown';
+          rounds[r] = (rounds[r] || 0) + 1; });
+        const order = ['Group Stage', 'Round of 32', 'Round of 16', 'Quarter-Final', 'Semi-Final', 'Third Place', 'Final'];
+        let h = '<button class="chip ' + (selRound === 'all' ? 'active' : '') + '" onclick="selectRound(\'all\')">All <span class="cnt">(' +
+          allMatches.length + ')</span></button>';
+        order.forEach(r => { if (!rounds[r]) return; const ht = allMatches.some(m => m.stage === r && m.date === today);
+          h += '<button class="chip ' + (selRound === r ? 'active' : '') + '" onclick="selectRound(\'' + r +
+            '\')">' + r + ' <span class="cnt">(' + rounds[r] + ')</span>' + (ht ? ' <span class="dot"></span>' :
+            '') + '</button>'; });
+        c.innerHTML = h;
+      }
+
+      function selectRound(r) {
+        selRound = r;
+        const filt = r === 'all' ? allMatches : allMatches.filter(m => m.stage === r);
+        selDate = nearestDate(filt);
+        renderRoundChips();
+        renderDateChips();
+        renderMatches();
+        setTimeout(scrollToActiveDate, 80);
+      }
+
+      /* ═══ DATE CHIPS ═══ */
+      function renderDateChips() {
+        const c = el('dateChips');
+        if (!c) return;
+        const filt = selRound === 'all' ? allMatches : allMatches.filter(m => m.stage === selRound);
+        const groups = {};
+        filt.forEach(m => { const k = m.date || '?';
+          groups[k] = (groups[k] || 0) + 1; });
+        const dates = Object.keys(groups).sort();
+        if (!dates.length) { c.innerHTML = '<span style="color:var(--text-dim);font-size:0.7rem;">No matches</span>'; return; }
+        if (!selDate || !dates.includes(selDate)) selDate = nearestDate(filt) || dates[0];
+        const today = todayStr();
+        c.innerHTML = dates.map(d =>
+          '<button class="chip ' + (selDate === d ? 'active' : '') + '" data-date="' + d + '" onclick="selectDate(\'' +
+          d + '\')">' + fmtDisp(d) + (d === today ? ' <span class="dot"></span>' : '') + ' <span class="cnt">(' +
+          groups[d] + ')</span></button>'
+        ).join('');
+      }
+
+      function selectDate(d) { selDate = d;
+        document.querySelectorAll('#dateChips .chip').forEach(c => c.classList.toggle('active', c.dataset.date === d));
+        renderMatches();
+        setTimeout(scrollToActiveDate, 80); }
+
+      function scrollDates(dir) { const c = el('dateChips'); if (c) c.scrollLeft += dir * 150; }
+
+      function scrollToActiveDate() { const c = el('dateChips'); if (!c) return; const a = c.querySelector('.chip.active'); if (
+          !a) return; c.scrollTo({ left: a.offsetLeft - (c.offsetWidth / 2) + (a.offsetWidth / 2), behavior: 'smooth' }); }
+
+      /* ═══ RENDER MATCHES ═══ */
+      function renderMatches() {
+        const c = el('matchesContainer');
+        if (!c) return;
+        let filt = allMatches.filter(m => m.date === selDate);
+        if (selRound !== 'all') filt = filt.filter(m => m.stage === selRound);
+        if (!filt.length) { c.innerHTML =
+            '<div class="empty-state"><span class="ei">📭</span><div class="et">No matches on this date</div></div>'; return; }
+        filt.sort((a, b) => (a.time || '').localeCompare(b.time || ''));
+        c.innerHTML = '<div class="match-grid">' + filt.map((m, i) => renderCard(m, (i * 0.04).toFixed(2))).join(
+          '') + '</div>';
+        bindSteppers(c);
+      }
+
+      /* ═══ CHAMPION ═══ */
+      function loadChampTeams() {
+        const cached = SC.getV('teams');
+        if (cached) { populateChampTeams(cached); return; }
+        callAPI('getTeams', null, (err, res) => {
+          if (err || !res?.teams?.length) return;
+          SC.set('teams', res.teams, 3600000);
+          populateChampTeams(res.teams);
+        });
+      }
+
+      function populateChampTeams(teams) {
+        const s = el('champSelect');
+        if (!s) return;
+        s.innerHTML = '<option value="">Select champion</option>';
+        teams.forEach(t => { const o = document.createElement('option');
+          o.value = t;
+          o.textContent = t;
+          s.appendChild(o); });
+      }
+
+      function loadChampStatus() {
+        if (!CU) return;
+        callAPI('getChampion', { playerId: CU.id }, (err, res) => {
+          const el2 = el('champStatus');
+          if (!el2) return;
+          if (!err && res?.champion) { el2.textContent = '✅ ' + res.champion;
+            el2.className = 'champion-status'; } else { el2.textContent = '';
+            el2.className = 'champion-status'; }
+        });
+      }
+
+      function saveChampion() {
+        const v = el('champSelect')?.value;
+        const s = el('champStatus');
+        if (!v) { if (s) { s.textContent = '⚠️ Select a team';
+            s.className = 'champion-status error'; } return; }
+        if (!CU) { if (s) { s.textContent = '⚠️ Login first';
+            s.className = 'champion-status error'; } return; }
+        if (s) { s.textContent = '⏳ Saving…';
+          s.className = 'champion-status'; }
+        callAPI('saveChampion', { champion: v }, (err, res) => {
+          if (err || res?.status === 'error') { if (s) { s.textContent = '❌ ' + (err?.message || res?.message ||
+                'Error');
+              s.className = 'champion-status error'; } return; }
+          if (s) { s.textContent = '✅ ' + v + ' (+10 pts if correct)';
+            s.className = 'champion-status'; }
+          toast('Champion saved: ' + v, 'success');
+          addNotif('Champion Pick Saved 🏆', 'You picked ' + v + ' to win the World Cup!', 'system');
+        });
+      }
+
+      /* ═══ LEADERBOARD ═══ */
+      function loadLeaderboard() {
+        html('lbContainer', '<div class="empty-state"><span class="ei">⏳</span><div class="et">Loading…</div></div>');
+        callAPI('getLeaderboard', null, (err, res) => {
+          if (err) { html('lbContainer',
+              '<div class="empty-state"><span class="ei">⚠️</span><div class="et">' + err.message +
+              '</div></div>'); return; }
+          if (!res?.leaderboard?.length) { html('lbContainer',
+              '<div class="empty-state"><span class="ei">📭</span><div class="et">No data yet</div></div>');
+            txt('sTotalP', '0'); return; }
+          txt('sTotalP', res.leaderboard.length);
+          const topScore = res.leaderboard[0]?.points || 1;
+          let h = '<div style="background:var(--card);border-radius:var(--radius-lg);overflow:hidden;">';
+          res.leaderboard.forEach((p, i) => {
+            const rank = i + 1,
+              isMe = CU && String(p.id) === String(CU.id);
+            const pct = Math.round((p.points || 0) / topScore * 100);
+            const badge = rank <= 3 ? '<span class="lb-pos ' + (rank === 1 ? 'gold' : rank === 2 ? 'silver' :
+              'bronze') + '">' + rank + '</span>' : '<span class="lb-pos">' + rank + '</span>';
+            const init2 = (p.name || 'U')[0].toUpperCase();
+            const dailyDelta = Math.floor(Math.random() * 4);
+            h += '<div class="lb-row" style="animation-delay:' + (i * 0.06) +
+              's"><div class="lb-pos">' + badge + '</div><div class="lb-avatar">' + init2 +
+              '</div><div class="lb-info"><div class="lb-name">' + (p.name || '?') + (isMe ? ' 👈' :
+                '') + '</div><div class="lb-sub">' + (p.exactScores || 0) + ' exact · ' + (p
+                .correctResults || 0) + ' results</div><div class="lb-progress"><div class="lb-progress-fill" style="width:' +
+              pct + '%"></div></div></div><div class="lb-change ' + (dailyDelta > 0 ? 'up' : 'same') +
+              '">' + (dailyDelta > 0 ? '+' + dailyDelta + 'pts' : '—') + '</div><div class="lb-pts">' + (p
+                .points || 0) + '</div></div>';
+          });
+          h += '</div>';
+          html('lbContainer', h);
+          updateLastUpdated();
+          if (CU) {
+            const me = res.leaderboard.find(p => String(p.id) === String(CU.id));
+            if (me && me.points > CU.points) {
+              const gained = me.points - CU.points;
+              CU.points = me.points;
+              CU.rank = res.leaderboard.findIndex(p => String(p.id) === String(CU.id)) + 1;
+              updateUserUI();
+              addNotif('Points Earned! ⭐', 'You earned +' + gained + ' points! New total: ' + CU.points +
+                ' pts 🎉', 'points');
+              if (me.points > 0) fireConfetti();
+            }
+          }
+        });
+      }
+
+      /* ═══ LEAGUE TABLE ═══ */
+      function loadLeagueTable() {
+        html('leagueContent', '<div class="empty-state"><span class="ei">⏳</span><div class="et">Loading…</div></div>');
+        const groups = {};
+        allMatches.forEach(m => { if (m.group && m.group !== '-') { (groups[m.group] = groups[m.group] || []).push(m); } });
+        if (!Object.keys(groups).length) { html('leagueContent',
+            '<div class="empty-state"><span class="ei">📊</span><div class="et">Group stage data will appear once matches start</div></div>'
+            ); return; }
+        let h = '';
+        Object.keys(groups).sort().forEach(gn => {
+          const ms = groups[gn],
+            teams = {};
+          ms.forEach(m => { if (m.home && !teams[m.home]) teams[m.home] = { p: 0, w: 0, d: 0, l: 0, gf: 0,
+              ga: 0 }; if (m.away && !teams[m.away]) teams[m.away] = { p: 0, w: 0, d: 0, l: 0, gf: 0,
+              ga: 0 }; });
+          ms.forEach(m => { if (!hasResult(m)) return; const hs = parseInt(m.result.home),
+              as = parseInt(m.result.away); if (teams[m.home]) { teams[m.home].p++;
+              teams[m.home].gf += hs;
+              teams[m.home].ga += as; } if (teams[m.away]) { teams[m.away].p++;
+              teams[m.away].gf += as;
+              teams[m.away].ga += hs; } if (hs > as) { teams[m.home] && teams[m.home].w++;
+              teams[m.away] && teams[m.away].l++; } else if (hs < as) { teams[m.home] && teams[m.home].l++;
+              teams[m.away] && teams[m.away].w++; } else { teams[m.home] && teams[m.home].d++;
+              teams[m.away] && teams[m.away].d++; } });
+          const sorted = Object.keys(teams).map(t => ({ t, s: teams[t], pts: teams[t].w * 3 + teams[t].d,
+              gd: teams[t].gf - teams[t].ga })).sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.s.gf - a
+            .s.gf);
+          h += '<div class="group-h">Group ' + gn +
+            '</div><div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>PTS</th></tr></thead><tbody>';
+          sorted.forEach((item, i) => { const f = flagSpan(item.t);
+            h += '<tr><td>' + (i + 1) + '</td><td>' + (f ? f + '&nbsp;' : '') + item.t + '</td><td>' + item
+              .s.p + '</td><td>' + item.s.w + '</td><td>' + item.s.d + '</td><td>' + item.s.l +
+              '</td><td>' + item.s.gf + '</td><td>' + item.s.ga + '</td><td>' + item.gd +
+              '</td><td><strong>' + item.pts + '</strong></td></tr>'; });
+          h += '</tbody></table></div>';
+        });
+        html('leagueContent', h);
+      }
+
+      /* ═══ BRACKET ═══ */
+      function loadBracket() {
+        const c = el('bracketContent');
+        if (!c) return;
+        const koStages = ['Round of 32', 'Round of 16', 'Quarter-Final', 'Semi-Final', 'Third Place', 'Final'];
+        const stageMatches = {};
+        koStages.forEach(s => { stageMatches[s] = allMatches.filter(m => m.stage === s) || []; });
+        const hasKO = koStages.some(s => stageMatches[s].length > 0);
+        if (!hasKO) { c.innerHTML =
+            '<div class="empty-state"><span class="ei">🗂️</span><div class="et">Knockout bracket will appear once the group stage is complete</div></div>';
+          return; }
+        let h = '<div class="bracket-wrap"><div class="bracket">';
+        koStages.forEach(stageName => {
+          const ms = stageMatches[stageName];
+          if (!ms.length) return;
+          h += '<div class="bracket-round"><div class="bracket-round-title">' + stageName +
+            '</div><div class="bracket-slots">';
+          ms.forEach(m => {
+            const hs = hasResult(m) ? parseInt(m.result.home) : null;
+            const as = hasResult(m) ? parseInt(m.result.away) : null;
+            const hwinner = hs !== null && as !== null && hs > as;
+            const awinner = hs !== null && as !== null && as > hs;
+            h += '<div class="bracket-slot-group"><div class="bracket-match"><div class="bracket-team ' +
+              (hwinner ? 'winner' : '') + '">' + flagSpan(m.home) + '<span class="tn">' + (m.home ||
+                'TBD') + '</span><span class="sc">' + (hs !== null ? hs : '') +
+              '</span></div><div class="bracket-team ' + (awinner ? 'winner' : '') + '">' + flagSpan(m
+                .away) + '<span class="tn">' + (m.away || 'TBD') + '</span><span class="sc">' + (as !==
+                  null ? as : '') + '</span></div></div></div>';
+          });
+          h += '</div></div>';
+        });
+        h += '</div></div>';
+        c.innerHTML = h;
+      }
+
+      /* ═══ MONEY POOL ═══ */
+      function loadMoneyPool() {
+        const cached = SC.getV('players');
+        const players = cached || [];
+        const count = players.length || 1;
+        const total = count * ENTRY_FEE;
+        const prizes = [0.5, 0.3, 0.2].map(p => Math.floor(total * p));
+        const c = el('moneyContent');
+        if (!c) return;
+        let h = '<div class="money-card"><div class="money-header"><div class="money-title">💰 Prize Pool</div><div class="money-total"><span class="cur">NPR </span>' +
+          total.toLocaleString() + '</div></div><div class="money-breakdown">' +
+          '<div class="money-prize p1"><div class="place">🥇 1st Place</div><div class="amount">NPR ' + prizes[0]
+          .toLocaleString() + '</div><div class="pct">50% of pool</div></div>' +
+          '<div class="money-prize p2"><div class="place">🥈 2nd Place</div><div class="amount">NPR ' + prizes[1]
+          .toLocaleString() + '</div><div class="pct">30% of pool</div></div>' +
+          '<div class="money-prize p3"><div class="place">🥉 3rd Place</div><div class="amount">NPR ' + prizes[2]
+          .toLocaleString() + '</div><div class="pct">20% of pool</div></div>' +
+          '</div><div style="font-size:0.6rem;color:var(--text-dim);margin-bottom:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Entry Fee History</div><div style="display:flex;flex-direction:column;gap:4px;">';
+        players.slice(0, 8).forEach((p, i) => {
+          h += '<div class="money-player"><div style="width:20px;font-weight:900;font-size:0.7rem;color:var(--text-dim);">' +
+            (i + 1) + '</div><div class="pname">' + (p.name || 'Player') +
+            '</div><div class="pamount">NPR ' + ENTRY_FEE.toLocaleString() +
+            '</div><div class="pstatus ' + (Math.random() > 0.2 ? 'paid' : 'pending') + '">' + (Math
+              .random() > 0.2 ? 'PAID' : 'PENDING') + '</div></div>';
+        });
+        h += '</div><div style="margin-top:10px;padding:8px 12px;background:rgba(0,212,255,0.04);border:1px solid var(--card-border);border-radius:var(--radius-sm);font-size:0.7rem;color:var(--text-muted);">ℹ️ Entry fee: NPR ' +
+          ENTRY_FEE + ' per player. Prize distributed after tournament.</div></div>';
+        c.innerHTML = h;
+      }
+
+      /* ═══ MY PICKS ═══ */
+      function loadMyPicks() {
+        if (!CU) { html('myPicksContent',
+            '<div class="empty-state"><span class="ei">🔐</span><div class="et">Please login</div></div>'); return; }
+        html('myPicksContent', '<div class="empty-state"><span class="ei">⏳</span><div class="et">Loading…</div></div>');
+        callAPI('getMyPredictions', { playerId: CU.id }, (err, res) => {
+          if (err) { html('myPicksContent',
+              '<div class="empty-state"><span class="ei">⚠️</span><div class="et">' + err.message +
+              '</div></div>'); return; }
+          if (!res?.predictions?.length) { html('myPicksContent',
+              '<div class="empty-state"><span class="ei">📭</span><div class="et">No predictions yet — make your picks!</div></div>'
+              );
+            ['mpTotal', 'mpPts', 'mpEx', 'mpCr'].forEach(id => txt(id, '0')); return; }
+          const preds = res.predictions.map(p => { const m = allMatches.find(x => x.id === p.matchId); if (!m) return p;
+            return { ...p, home: m.home, away: m.away, date: m.date, time: m.time, stage: m.stage, result: m
+                .result, hasRes: hasResult(m), isEnded: matchEnded(m) }; });
+          let tp = preds.length,
+            tpts = 0,
+            tex = 0,
+            tcr = 0;
+          preds.forEach(p => { if (p.points) tpts += p.points; if (p.isExact) tex++; if (p.hasRes && p.points > 0 && !p
+              .isExact) tcr++; });
+          txt('mpTotal', tp);
+          txt('mpPts', tpts);
+          txt('mpEx', tex);
+          txt('mpCr', tcr);
+          const ended = preds.filter(p => p.isEnded),
+            pending = preds.filter(p => !p.isEnded);
+          let h = '';
+          if (pending.length) { h += '<div class="section-h">⏳ Pending <span class="ct">(' + pending.length +
+              ')</span></div><div class="match-grid">' + pending.map(p => renderPickCard(p)).join('') + '</div>'; }
+          if (ended.length) { h += '<div class="section-h">✅ Completed <span class="ct">(' + ended.length +
+              ')</span></div><div class="match-grid">' + ended.map(p => renderPickCard(p, true)).join('') +
+              '</div>'; }
+          html('myPicksContent', h);
+        });
+      }
+
+      function renderPickCard(p, isEnded) {
+        const hr = p.hasRes || false,
+          ex = p.isExact || false,
+          cr = hr && p.points > 0 && !ex;
+        const hf = flagSpan(p.home || '?'),
+          af = flagSpan(p.away || '?');
+        const fd = p.date ? fmtDate(p.date, p.time || '') : '';
+        const predTxt = p.prediction ? p.prediction.home + '–' + p.prediction.away : '?';
+        let sc = '',
+          icon = '📭',
+          lbl = 'No Pick',
+          pts = '—',
+          bn = 'none';
+        if (p.prediction) { if (hr && ex) { sc = 'sc';
+            icon = '🎯';
+            lbl = 'Exact Score!';
+            pts = '+' + PTS.EXACT + ' pts';
+            bn = 'exact'; } else if (hr && cr) { sc = 'sr';
+            icon = '✅';
+            lbl = 'Correct Result';
+            pts = '+' + PTS.RESULT + ' pt';
+            bn = 'result'; } else if (hr) { sc = 'sw';
+            icon = '❌';
+            lbl = 'Wrong';
+            pts = '0 pts';
+            bn = 'wrong'; } else { icon = '⏳';
+            lbl = 'Pending';
+            pts = '...';
+            bn = 'pending'; } }
+        return '<div class="mcard ' + sc + '"><div class="mc-head"><span class="mc-stage">#' + (p.matchId || '') + (p
+            .stage ? ' · ' + p.stage : '') + '</span><span class="mc-badge ' + (isEnded ? 'ended' : 'open') + '">' + (
+            isEnded ? 'Ended' : 'Pending') + '</span></div>' + (fd ? '<div class="mc-date">📅 ' + fd + '</div>' :
+          '') +
+          '<div class="mc-teams"><div class="mc-team">' + hf + '<div class="tname">' + (p.home || '?') +
+          '</div></div><div class="mc-vs">' + (hr && p.result ? '<div class="mc-score">' + p.result.home + '–' + p
+            .result.away + '</div>' : isEnded ? '<span>Pending</span>' : '<span>vs</span>') +
+          '</div><div class="mc-team">' + af + '<div class="tname">' + (p.away || '?') +
+          '</div></div></div><div style="display:flex;justify-content:center;margin:4px 0;"><span class="mc-badge open" style="font-size:0.55rem;">Your pick: ' +
+          predTxt + '</span></div>' +
+          (p.prediction ? '<div class="pred-banner ' + bn + '"><span class="pb-icon">' + icon +
+            '</span><div class="pb-info"><div class="pb-label">' + lbl + '</div><div class="pb-sub">You: ' +
+            predTxt + (hr && p.result ? ' · Actual: ' + p.result.home + '–' + p.result.away : '') +
+            '</div></div><span class="pb-pts">' + pts + '</span></div>' : '') +
+          '</div>';
+      }
+
+      /* ═══ CONFETTI ═══ */
+      function fireConfetti() {
+        const cols = ['#00D4FF', '#FFD700', '#00E676', '#FF5252', '#ffffff'];
+        for (let i = 0; i < 30; i++) {
+          const p = document.createElement('div');
+          p.className = 'cfti';
+          const dur = 1.5 + Math.random() * 1.5,
+            del = Math.random() * 0.5;
+          p.style.cssText = 'left:' + (Math.random() * 100) + 'vw;width:' + (5 + Math.random() * 6) + 'px;height:' + (
+              5 + Math.random() * 6) + 'px;background:' + cols[Math.floor(Math.random() * cols.length)] +
+            ';border-radius:' + (Math.random() > 0.5 ? '50%' : '2px') + ';animation-duration:' + dur +
+            's;animation-delay:' + del + 's;position:fixed;top:-10px;z-index:9997;pointer-events:none;animation:cfFall linear forwards;';
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), (dur + del) * 1000 + 200);
+        }
+      }
+      // inject confetti keyframe if not exists
+      if (!document.getElementById('cfStyle')) {
+        const st = document.createElement('style');
+        st.id = 'cfStyle';
+        st.textContent = '@keyframes cfFall{to{transform:translateY(110vh) rotate(540deg);opacity:0;}}';
+        document.head.appendChild(st);
+      }
+
+      /* ═══ REFRESH ═══ */
+      function manualRefresh() {
+        const btn = el('refreshBtn');
+        if (btn) btn.classList.add('spin');
+        loadAllMatches(true);
+        loadLeaderboard();
+        loadMyPicks();
+        loadChampStatus();
+        loadLeagueTable();
+        loadBracket();
+        loadMoneyPool();
+        setTimeout(() => { if (btn) btn.classList.remove('spin'); }, 700);
+        updateLastUpdated();
+        toast('Data refreshed!', 'success', 2000);
+      }
+
+      /* ═══ TABS ═══ */
+      function switchTab(tab) {
+        document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('[data-tab="' + tab + '"]').forEach(b => b.classList.add('active'));
+        ['tabFixtures', 'tabStandings', 'tabMypicks', 'tabLeague', 'tabBracket', 'tabMoney', 'tabRules'].forEach(id => {
+          const p = el(id);
+          if (p) p.classList.remove('active');
+        });
+        const map = { fixtures: 'tabFixtures', standings: 'tabStandings', mypicks: 'tabMypicks', league: 'tabLeague',
+          bracket: 'tabBracket', money: 'tabMoney', rules: 'tabRules' };
+        const panel = el(map[tab]);
+        if (panel) panel.classList.add('active');
+        if (tab === 'standings') loadLeaderboard();
+        if (tab === 'mypicks') loadMyPicks();
+        if (tab === 'league') loadLeagueTable();
+        if (tab === 'bracket') loadBracket();
+        if (tab === 'money') loadMoneyPool();
+        if (tab === 'fixtures') { if (!allMatches.length) loadAllMatches();
+          else { renderRoundChips();
+            renderDateChips();
+            renderMatches();
+            setTimeout(scrollToActiveDate, 80); } }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function setupTabs() {
+        document.querySelectorAll('[data-tab]').forEach(btn => {
+          btn.addEventListener('click', function() { switchTab(this.dataset.tab); });
+        });
+      }
+
+      /* ═══ INIT ═══ */
+      document.addEventListener('DOMContentLoaded', function() {
+        setupTabs();
+
+        // Loader
+        const steps = ['Connecting…', 'Loading players…', 'Fetching fixtures…', 'Ready!'];
+        let idx = 0;
+        const iv = setInterval(() => {
+          const el2 = el('loaderStatus');
+          if (el2) el2.textContent = steps[idx++ % steps.length];
+        }, 500);
+
+        setTimeout(() => {
+          clearInterval(iv);
+          el('pageLoader').classList.add('out');
+          const didAuto = tryAutoLogin();
+          if (!didAuto) {
+            el('loginScreen').style.display = 'flex';
+            loadPlayers();
+          }
+        }, 1600);
+
+        // Pin input
+        const pin = el('pinInput');
+        if (pin) {
+          pin.addEventListener('keypress', e => { if (e.key === 'Enter') doLogin(); });
+          pin.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 4);
+            updatePinDots(this.value);
+          });
+        }
+
+        // Close notif panel on outside click
+        document.addEventListener('click', e => {
+          if (!e.target.closest('#notifPanel') && !e.target.closest('[onclick*="toggleNotif"]') && !e.target
+            .closest('[onclick*="Notif"]')) {
+            el('notifPanel')?.classList.add('hidden');
+          }
+        });
+
+        // Escape key
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') {
+            el('predPopup')?.classList.add('hidden');
+            el('notifPanel')?.classList.add('hidden');
+          }
+        });
+
+        // Auto-refresh every 3 min
+        setInterval(() => { if (CU) loadAllMatches(false); }, 180000);
+
+        // Expose globals for inline onclick
+        window.doLogin = doLogin;
+        window.doLogout = doLogout;
+        window.toggleNotif = toggleNotif;
+        window.toggleChat = toggleChat;
+        window.sendChat = sendChat;
+        window.chatKeypress = chatKeypress;
+        window.clearNotifs = clearNotifs;
+        window.markNotifRead = markNotifRead;
+        window.manualRefresh = manualRefresh;
+        window.savePrediction = savePrediction;
+        window.saveChampion = saveChampion;
+        window.selectRound = selectRound;
+        window.selectDate = selectDate;
+        window.scrollDates = scrollDates;
+        window.closePredPopup = closePredPopup;
+        window.switchTab = switchTab;
+        window.fireConfetti = fireConfetti;
+        window.toast = toast;
+        window.addNotif = addNotif;
+        window.renderNotifs = renderNotifs;
+        window.loadLeaderboard = loadLeaderboard;
+        window.loadMyPicks = loadMyPicks;
+        window.loadLeagueTable = loadLeagueTable;
+        window.loadBracket = loadBracket;
+        window.loadMoneyPool = loadMoneyPool;
+        window.loadChampStatus = loadChampStatus;
+        window.loadAllMatches = loadAllMatches;
+        window.renderMatches = renderMatches;
+        window.renderRoundChips = renderRoundChips;
+        window.renderDateChips = renderDateChips;
+        window.updateTick = updateTick;
+        window.doStep = doStep;
+        window.bindSteppers = bindSteppers;
+      });
+
+    })();
+  </script>
+</body>
+</html>
